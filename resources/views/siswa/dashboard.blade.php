@@ -133,44 +133,44 @@
                         <div class="widget-content">
                             @if ($notif_ujian->count() > 0)
                                 @foreach ($notif_ujian as $nu)
-                                @if ($nu->ujian->jenis === 0)
-                                    <a href="{{ url('/siswa/ujian/' . $nu->kode) }}" class="@if($nu->waktu_berakhir == null) btn-kerjakan @endif">
-                                        <div class="transactions-list mt-1">
-                                            <div class="t-item">
-                                                <div class="t-company-name">
-                                                    <div class="t-icon">
-                                                        <div class="icon">
-                                                            <span data-feather="cast"></span>
+                                    @if ($nu->ujian->jenis === 0)
+                                        <a href="{{ url('/siswa/ujian/' . $nu->kode) }}"
+                                            class="@if ($nu->waktu_berakhir == null) btn-kerjakan @endif">
+                                            <div class="transactions-list mt-1">
+                                                <div class="t-item">
+                                                    <div class="t-company-name">
+                                                        <div class="t-icon">
+                                                            <div class="icon">
+                                                                <span data-feather="cast"></span>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="t-name">
-                                                        <h4>{{ $nu->ujian->nama }}</h4>
-                                                        <p class="meta-date">{{ $nu->ujian->mapel->nama_mapel }}</p>
+                                                        <div class="t-name">
+                                                            <h4>{{ $nu->ujian->nama }}</h4>
+                                                            <p class="meta-date">{{ $nu->ujian->mapel->nama_mapel }}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                @else
-                                    <a href="{{ url('/siswa/ujian_essay/' . $nu->kode) }}">
-                                        <div class="transactions-list mt-1">
-                                            <div class="t-item">
-                                                <div class="t-company-name">
-                                                    <div class="t-icon">
-                                                        <div class="icon">
-                                                            <span data-feather="cast"></span>
+                                        </a>
+                                    @else
+                                        <a href="{{ url('/siswa/ujian_essay/' . $nu->kode) }}">
+                                            <div class="transactions-list mt-1">
+                                                <div class="t-item">
+                                                    <div class="t-company-name">
+                                                        <div class="t-icon">
+                                                            <div class="icon">
+                                                                <span data-feather="cast"></span>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="t-name">
-                                                        <h4>{{ $nu->ujian->nama }}</h4>
-                                                        <p class="meta-date">{{ $nu->ujian->mapel->nama_mapel }}</p>
+                                                        <div class="t-name">
+                                                            <h4>{{ $nu->ujian->nama }}</h4>
+                                                            <p class="meta-date">{{ $nu->ujian->mapel->nama_mapel }}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                @endif
-                                    
+                                        </a>
+                                    @endif
                                 @endforeach
                             @else
                                 <div class="transactions-list"
@@ -259,11 +259,10 @@
         </div>
         <div class="footer-wrapper">
             <div class="footer-section f-section-1">
-                <p class="">Copyright © 2021 <a target="_blank" href="http://bit.ly/demo-abdul"
-                        class="text-primary">Abduloh Malela</a></p>
+                <p class="">Copyright © 2024 Developer</p>
             </div>
             <div class="footer-section f-section-2">
-                <p class="">CBT-MALELA v2</p>
+                <p class="">CBT</p>
             </div>
         </div>
     </div>
@@ -272,6 +271,20 @@
 
     {!! session('pesan') !!}
     <script>
-        $(".btn-kerjakan").click(function(e){e.preventDefault();var t=$(this).attr("href");swal({title:"yakin mulai ujian?",text:"waktu ujian akan dimulai & tidak bisa berhenti!",type:"warning",showCancelButton:!0,cancelButtonText:"tidak",confirmButtonText:"ya, mulai",padding:"2em"}).then(function(e){e.value&&(document.location.href=t)})})
+        $(".btn-kerjakan").click(function(e) {
+            e.preventDefault();
+            var t = $(this).attr("href");
+            swal({
+                title: "yakin mulai ujian?",
+                text: "waktu ujian akan dimulai & tidak bisa berhenti!",
+                type: "warning",
+                showCancelButton: !0,
+                cancelButtonText: "tidak",
+                confirmButtonText: "ya, mulai",
+                padding: "2em"
+            }).then(function(e) {
+                e.value && (document.location.href = t)
+            })
+        })
     </script>
 @endsection

@@ -216,7 +216,7 @@ class AuthController extends Controller
         }
 
         return view('auth.register', [
-            "title" => "Daftar Akun CBT MALELA",
+            "title" => "Daftar Akun CBT",
             "kelas" => Kelas::all()
         ]);
     }

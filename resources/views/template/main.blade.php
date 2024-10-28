@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>CBT MALELA | {{ $title }}</title>
+    <title>CBT | {{ $title }}</title>
     <link rel="icon" type="image/x-icon" href="{{ url('/assets/img') }}/cbt-malela.png" />
     <link href="{{ url('/assets/cbt-malela') }}/assets/css/loader.css" rel="stylesheet" type="text/css" />
     <script src="{{ url('/assets/cbt-malela') }}/assets/js/loader.js"></script>
@@ -199,7 +199,7 @@
                                         class="img-fluid mr-2 bg-white" alt="avatar">
                                     <div class="media-body">
                                         <h5>{{ $guru->nama_guru }}</h5>
-                                        <p>GURU CBT MALELA</p>
+                                        <p>GURU CBT</p>
                                     </div>
                                     @php
                                         $link_profile = '/guru/profile';
@@ -210,7 +210,7 @@
                                         class="img-fluid mr-2 bg-white" alt="avatar">
                                     <div class="media-body">
                                         <h5>{{ $siswa->nama_siswa }}</h5>
-                                        <p>SISWA CBT MALELA</p>
+                                        <p>SISWA CBT</p>
                                     </div>
                                     @php
                                         $link_profile = '/siswa/profile';
@@ -247,7 +247,21 @@
     </div>
     <!-- END MAIN CONTAINER -->
     <script>
-        $(".logout").on("click",function(t){t.preventDefault();var n=$(this).attr("href");swal({title:"yakin logout?",text:"anda harus login ulang untuk masuk ke aplikasi!",type:"warning",showCancelButton:!0,cancelButtonText:"tidak",confirmButtonText:"ya, logout",padding:"2em"}).then(function(t){t.value&&(document.location.href=n)}),$("#swal2-container").css("z-index","9999")}),feather.replace();
+        $(".logout").on("click", function(t) {
+            t.preventDefault();
+            var n = $(this).attr("href");
+            swal({
+                title: "yakin logout?",
+                text: "anda harus login ulang untuk masuk ke aplikasi!",
+                type: "warning",
+                showCancelButton: !0,
+                cancelButtonText: "tidak",
+                confirmButtonText: "ya, logout",
+                padding: "2em"
+            }).then(function(t) {
+                t.value && (document.location.href = n)
+            }), $("#swal2-container").css("z-index", "9999")
+        }), feather.replace();
     </script>
 </body>
 

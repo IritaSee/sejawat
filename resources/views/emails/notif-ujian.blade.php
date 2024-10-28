@@ -12,9 +12,9 @@
     <div style="padding: 10px;">
         <div
             style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; font-size: 20px; color: #1C3FAA; font-weight: bold;">
-            CBT Malela
+            CBT
         </div>
-        <small style="color: #000;">cbtmalela laravel-8 | by Abduloh</small>
+        <small style="color: #000;">cbt | by Developer</small>
         <p style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; color: #000;">
             Halo para siswa, {{ $details['nama_guru'] }} telah memposting Ujian baru :
         </p>

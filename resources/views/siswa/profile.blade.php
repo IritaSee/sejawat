@@ -16,12 +16,13 @@
                                 </a>
                             </div>
                             <div class="text-center user-info">
-                                <img src="{{ asset('assets/user-profile/' . $siswa->avatar) }}" class="img-user" alt="avatar" style="width: 125px; height: 125px;">
+                                <img src="{{ asset('assets/user-profile/' . $siswa->avatar) }}" class="img-user"
+                                    alt="avatar" style="width: 125px; height: 125px;">
                                 <p class="">{{ $siswa->nama_siswa }}</p>
                             </div>
                             <div class="user-info-list" style="margin-top: -10px;">
                                 <div class="text-center">
-                                    <p>SISWA CBT-MALELA</p>
+                                    <p>SISWA CBT</p>
                                     <ul class="contacts-block list-unstyled" style="margin-top: -5px;">
                                         <li class="contacts-block__item">
                                             <span data-feather="calendar"></span>
@@ -46,20 +47,24 @@
                     <div class="skills layout-spacing ">
                         <div class="widget-content widget-content-area">
                             <h3 class="">Update Profile</h3>
-                            <form action="{{ url("/siswa/edit_profile/" . $siswa->id) }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ url('/siswa/edit_profile/' . $siswa->id) }}" method="post"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="">Nama</label>
-                                    <input type="text" name="nama_siswa" id="nama_siswa" value="{{ old('nama_siswa', $siswa->nama_siswa) }}" class="form-control" required>
+                                    <input type="text" name="nama_siswa" id="nama_siswa"
+                                        value="{{ old('nama_siswa', $siswa->nama_siswa) }}" class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Email</label>
-                                    <input type="email" name="email" id="email" value="{{ $siswa->email }}" class="form-control" required readonly>
+                                    <input type="email" name="email" id="email" value="{{ $siswa->email }}"
+                                        class="form-control" required readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Foto</label>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" name="avatar" id="customFile" accept=".jpg, .png, .jpeg" onchange="previewImg()">
+                                        <input type="file" class="custom-file-input" name="avatar" id="customFile"
+                                            accept=".jpg, .png, .jpeg" onchange="previewImg()">
                                         <input type="hidden" name="gambar_lama" value="{{ $siswa->avatar }}">
                                         <label class="custom-file-label" for="customFile">Choose file</label>
                                     </div>
@@ -72,7 +77,7 @@
                     <div class="skills layout-spacing">
                         <div class="widget-content widget-content-area">
                             <h3 class="">Password</h3>
-                            <form action="{{ url("/siswa/edit_password/" . $siswa->id) }}" method="post">
+                            <form action="{{ url('/siswa/edit_password/' . $siswa->id) }}" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <label for="">Current Password</label>
@@ -97,6 +102,15 @@
     {!! session('pesan') !!}
 
     <script>
-        function previewImg(){var e=document.querySelector("#customFile");const t=document.querySelector(".custom-file-label"),o=document.querySelector(".img-user");t.textContent=e.files[0].name;const n=new FileReader;n.readAsDataURL(e.files[0]),n.onload=function(e){o.src=e.target.result}}
+        function previewImg() {
+            var e = document.querySelector("#customFile");
+            const t = document.querySelector(".custom-file-label"),
+                o = document.querySelector(".img-user");
+            t.textContent = e.files[0].name;
+            const n = new FileReader;
+            n.readAsDataURL(e.files[0]), n.onload = function(e) {
+                o.src = e.target.result
+            }
+        }
     </script>
 @endsection

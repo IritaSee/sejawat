@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <title>CBT | {{ $title }}</title>
-    <link rel="icon" type="image/x-icon" href="{{ url('/assets/img') }}/cbt-malela.png" />
+    <link rel="icon" type="image/x-icon" href="{{ url('/assets/img') }}/logo.png" />
     <link href="{{ url('/assets/cbt-malela') }}/assets/css/loader.css" rel="stylesheet" type="text/css" />
     <script src="{{ url('/assets/cbt-malela') }}/assets/js/loader.js"></script>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -70,7 +70,7 @@
             <ul class="navbar-nav theme-brand flex-row  text-center">
                 <li class="nav-item theme-logo">
                     <a href="">
-                        <img src="{{ url('/assets/img') }}/cbt-malela.png" class="navbar-logo" alt="logo">
+                        <img src="{{ url('/assets/img') }}/logo.png" class="navbar-logo" alt="logo">
                     </a>
                 </li>
                 <li class="nav-item theme-text">

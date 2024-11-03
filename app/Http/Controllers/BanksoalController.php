@@ -89,7 +89,7 @@ class BanksoalController extends Controller
 
         $detail_bank_soal = [];
         $index = 0;
-        $nama_soal =  $request->soal;
+        $nama_soal = $request->soal;
         foreach ($nama_soal as $soal) {
             array_push($detail_bank_soal, [
                 'kode' => $kode,
@@ -99,7 +99,8 @@ class BanksoalController extends Controller
                 'pg_3' => 'C. ' . $request->pg_3[$index],
                 'pg_4' => 'D. ' . $request->pg_4[$index],
                 'pg_5' => 'E. ' . $request->pg_5[$index],
-                'jawaban' => $request->jawaban[$index]
+                'jawaban' => $request->jawaban[$index],
+                'pembahasan' => $request->pembahasan[$index]
             ]);
 
             $index++;
@@ -127,10 +128,11 @@ class BanksoalController extends Controller
             </script>
         ");
     }
-    public function bank_pg_excel(Request $request) {
+    public function bank_pg_excel(Request $request)
+    {
         $kode = Str::random(30);
         $detail_bank_soal = Excel::toArray(new BankpgImport($kode), $request->excel);
-        
+
         if (count($detail_bank_soal) < 0) {
             return redirect('/guru/bank_soal/create')->with('pesan', "
                 <script>
@@ -143,7 +145,7 @@ class BanksoalController extends Controller
                 </script>
             ");
         }
-        
+
         $bank_soal = [
             'kode' => $kode,
             'guru_id' => session()->get('id'),
@@ -172,7 +174,7 @@ class BanksoalController extends Controller
 
         $detail_bank_soal = [];
         $index = 0;
-        $nama_soal =  $request->soal;
+        $nama_soal = $request->soal;
         foreach ($nama_soal as $soal) {
             array_push($detail_bank_soal, [
                 'kode' => $kode,
@@ -306,7 +308,7 @@ class BanksoalController extends Controller
     {
         $detail_bank_soal = [];
         $index = 0;
-        $nama_soal =  $request->soal;
+        $nama_soal = $request->soal;
         foreach ($nama_soal as $soal) {
             array_push($detail_bank_soal, [
                 'kode' => $bank_soal->kode,
@@ -316,7 +318,8 @@ class BanksoalController extends Controller
                 'pg_3' => 'C. ' . $request->pg_3[$index],
                 'pg_4' => 'D. ' . $request->pg_4[$index],
                 'pg_5' => 'E. ' . $request->pg_5[$index],
-                'jawaban' => $request->jawaban[$index]
+                'jawaban' => $request->jawaban[$index],
+                'pembahasan' => $request->pembahasan[$index]
             ]);
 
             $index++;
@@ -328,10 +331,10 @@ class BanksoalController extends Controller
         ];
 
         DetailbankpgModel::where('kode', $bank_soal->kode)
-                        ->delete();
+            ->delete();
 
         BanksoalModel::where('kode', $bank_soal->kode)
-                    ->update($data_bank_soal);
+            ->update($data_bank_soal);
 
         DetailbankpgModel::insert($detail_bank_soal);
 
@@ -350,7 +353,7 @@ class BanksoalController extends Controller
     {
         $detail_bank_soal = [];
         $index = 0;
-        $nama_soal =  $request->soal;
+        $nama_soal = $request->soal;
         foreach ($nama_soal as $soal) {
             array_push($detail_bank_soal, [
                 'kode' => $bank_soal->kode,
@@ -366,10 +369,10 @@ class BanksoalController extends Controller
         ];
 
         DetailbankessayModel::where('kode', $bank_soal->kode)
-                        ->delete();
+            ->delete();
 
         BanksoalModel::where('kode', $bank_soal->kode)
-                    ->update($data_bank_soal);
+            ->update($data_bank_soal);
 
         DetailbankessayModel::insert($detail_bank_soal);
 
@@ -403,7 +406,7 @@ class BanksoalController extends Controller
                 ->delete();
             BanksoalModel::destroy($bank_soal->id);
         }
-                        
+
         return redirect('/guru/bank_soal')->with('pesan', "
             <script>
                 swal({

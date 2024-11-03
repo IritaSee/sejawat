@@ -138,7 +138,7 @@ class UjianGuruController extends Controller
 
         $detail_ujian = [];
         $index = 0;
-        $nama_soal =  $request->soal;
+        $nama_soal = $request->soal;
         foreach ($nama_soal as $soal) {
             array_push($detail_ujian, [
                 'kode' => $kode,
@@ -148,7 +148,8 @@ class UjianGuruController extends Controller
                 'pg_3' => 'C. ' . $request->pg_3[$index],
                 'pg_4' => 'D. ' . $request->pg_4[$index],
                 'pg_5' => 'E. ' . $request->pg_5[$index],
-                'jawaban' => $request->jawaban[$index]
+                'jawaban' => $request->jawaban[$index],
+                'pembahasan' => $request->pembahasan[$index]
             ]);
 
             $index++;
@@ -319,7 +320,9 @@ class UjianGuruController extends Controller
                 'pg_3' => $soal->pg_3,
                 'pg_4' => $soal->pg_4,
                 'pg_5' => $soal->pg_5,
-                'jawaban' => $soal->jawaban
+                'jawaban' => $soal->jawaban,
+                'pembahasan' => $soal->pembahasan
+
             ]);
 
             $index++;
@@ -393,12 +396,12 @@ class UjianGuruController extends Controller
             'mapel_id' => $request->mapel,
             'jam' => $request->jam,
             'menit' => $request->menit,
-            
+
         ];
 
         $detail_ujian = [];
         $index = 0;
-        $nama_soal =  $request->soal;
+        $nama_soal = $request->soal;
         foreach ($nama_soal as $soal) {
             array_push($detail_ujian, [
                 'kode' => $kode,
@@ -476,7 +479,7 @@ class UjianGuruController extends Controller
             'mapel_id' => $request->b_mapel,
             'jam' => $request->b_jam,
             'menit' => $request->b_menit,
-            
+
         ];
 
         $detail_ujian = [];
@@ -691,7 +694,7 @@ class UjianGuruController extends Controller
     }
     public function ujian_ekspor($kode)
     {
-        $ujian =  Ujian::firstWhere('kode', $kode);
+        $ujian = Ujian::firstWhere('kode', $kode);
         $nama_kelas = $ujian->kelas->nama_kelas;
         return Excel::download(new PgExport($ujian), "nilai-pg-kelas-$nama_kelas.xlsx");
     }
@@ -704,18 +707,19 @@ class UjianGuruController extends Controller
     }
     public function essay_ekspor($kode)
     {
-        $ujian =  Ujian::firstWhere('kode', $kode);
+        $ujian = Ujian::firstWhere('kode', $kode);
         $nama_kelas = $ujian->kelas->nama_kelas;
         return Excel::download(new EssayExport($ujian), "nilai-essay-kelas-$nama_kelas.xlsx");
     }
 
-    public function ujian_reset($kode, $siswa_id) {
+    public function ujian_reset($kode, $siswa_id)
+    {
         $ujian = Ujian::firstWhere('kode', $kode);
         if ($ujian->jenis == 0) {
             // ujian pg
             $waktu_ujian = [
-                'waktu_berakhir' => null, 
-                'selesai' => null 
+                'waktu_berakhir' => null,
+                'selesai' => null
             ];
             WaktuUjian::where('kode', $kode)
                 ->where('siswa_id', $siswa_id)
@@ -723,7 +727,7 @@ class UjianGuruController extends Controller
             PgSiswa::where('kode', $kode)
                 ->where('siswa_id', $siswa_id)
                 ->delete();
-            
+
             return redirect('/guru/ujian' . '/' . $kode)->with('pesan', "
                 <script>
                     swal({
@@ -738,8 +742,8 @@ class UjianGuruController extends Controller
         if ($ujian->jenis == 1) {
             // ujian essay
             $waktu_ujian = [
-                'waktu_berakhir' => null, 
-                'selesai' => null 
+                'waktu_berakhir' => null,
+                'selesai' => null
             ];
             WaktuUjian::where('kode', $kode)
                 ->where('siswa_id', $siswa_id)
@@ -747,7 +751,7 @@ class UjianGuruController extends Controller
             EssaySiswa::where('kode', $kode)
                 ->where('siswa_id', $siswa_id)
                 ->delete();
-            
+
             return redirect('/guru/ujian_essay' . '/' . $kode)->with('pesan', "
                 <script>
                     swal({
@@ -760,19 +764,20 @@ class UjianGuruController extends Controller
             ");
         }
     }
-    public function ujian_reset_all($kode) {
+    public function ujian_reset_all($kode)
+    {
         $ujian = Ujian::firstWhere('kode', $kode);
         if ($ujian->jenis == 0) {
             // ujian pg
             $waktu_ujian = [
-                'waktu_berakhir' => null, 
-                'selesai' => null 
+                'waktu_berakhir' => null,
+                'selesai' => null
             ];
             WaktuUjian::where('kode', $kode)
                 ->update($waktu_ujian);
             PgSiswa::where('kode', $kode)
                 ->delete();
-            
+
             return redirect('/guru/ujian' . '/' . $kode)->with('pesan', "
                 <script>
                     swal({
@@ -787,14 +792,14 @@ class UjianGuruController extends Controller
         if ($ujian->jenis == 1) {
             // ujian essay
             $waktu_ujian = [
-                'waktu_berakhir' => null, 
-                'selesai' => null 
+                'waktu_berakhir' => null,
+                'selesai' => null
             ];
             WaktuUjian::where('kode', $kode)
                 ->update($waktu_ujian);
             EssaySiswa::where('kode', $kode)
                 ->delete();
-            
+
             return redirect('/guru/ujian_essay' . '/' . $kode)->with('pesan', "
                 <script>
                     swal({

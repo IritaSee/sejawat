@@ -152,7 +152,7 @@ code { color: #e7515a; }
 .navbar {
     padding: 0;
     min-height: 80px;
-    background: #095198;
+    background: #FCCF0C;
     -webkit-transition: .3s ease all;
     transition: .3s ease all;
     -webkit-box-shadow: 0 4px 6px 0 rgba(37, 35, 35, 0.08), 0 1px 20px 0 rgba(0, 0, 0, 0.07), 0px 1px 11px 0px rgba(0, 0, 0, 0.07);
@@ -188,8 +188,8 @@ code { color: #e7515a; }
     display: flex;
     justify-content: space-around;
     background: #fff;
-    border-right: 1px solid #095198;
-    background-image: linear-gradient(to right, #FCCF0C 0%, #095198 100%);
+    border-right: 1px solid #FCCF0C;
+    background-image: linear-gradient(to right, #095198 0%, #FCCF0C 100%);
 }
 .header-container .navbar-nav.theme-brand .theme-logo {
     align-self: center;
@@ -614,7 +614,7 @@ code { color: #e7515a; }
     margin: 0;
 }
 .navbar .navbar-item .nav-item.dropdown.notification-dropdown .dropdown-menu .icon-status svg.feather-x {
-    color: #bfc9d4;
+    color: #d4bfbf;
     width: 19px;
     height: 19px;
     cursor: pointer;

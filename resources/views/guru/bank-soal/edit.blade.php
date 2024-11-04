@@ -321,6 +321,31 @@
                                     </div>
                                 </div>
                             </div>
+                                     <!-- Tambahkan Kolom Pembahasan di Sini -->
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="">Pembahasan</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon-pembahasan">
+                                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <textarea
+                                            name="pembahasan[]"
+                                            class="form-control form-control-lg"
+                                            placeholder="Masukkan pembahasan di sini..."
+                                            aria-label="Pembahasan"
+                                            aria-describedby="basic-addon-pembahasan"
+                                            rows="4"
+                                            required
+                                            autocomplete="off"
+                                        ></textarea>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <a href="javascript:void(0);" class="btn btn-danger hapus-pg">Hapus</a>
                     </div>

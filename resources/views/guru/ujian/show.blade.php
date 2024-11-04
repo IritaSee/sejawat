@@ -37,15 +37,17 @@
                 <div class="card">
                     <div class="card-header bg-white" id="...">
                         <section class="mb-0 mt-0">
-                            <div role="menu" class="" data-toggle="collapse" data-target="#defaultAccordionOne" aria-expanded="true" aria-controls="defaultAccordionOne" style="cursor: pointer;">
+                            <div role="menu" class="" data-toggle="collapse" data-target="#defaultAccordionOne"
+                                aria-expanded="true" aria-controls="defaultAccordionOne" style="cursor: pointer;">
                                 Soal Ujian & Jawaban (Klik untuk lihat & tutup)
                             </div>
                         </section>
                     </div>
 
-                    <div id="defaultAccordionOne" class="collapse show" aria-labelledby="..." data-parent="#toggleAccordion">
+                    <div id="defaultAccordionOne" class="collapse show" aria-labelledby="..."
+                        data-parent="#toggleAccordion">
                         <div class="card-body">
-                        
+
                             <div class="row">
                                 <div class="col-lg-9">
                                     <form id="examwizard-question" action="#" method="POST">
@@ -58,7 +60,8 @@
                                                 @foreach ($ujian->detailujian as $soal)
                                                     <div class="question <?= $soal_hidden ?> question-{{ $no }}"
                                                         data-question="{{ $no }}">
-                                                        <div class="widget-heading pl-2 pt-2" style="border-bottom: 1px solid #e0e6ed;">
+                                                        <div class="widget-heading pl-2 pt-2"
+                                                            style="border-bottom: 1px solid #e0e6ed;">
                                                             <div class="">
                                                                 <h6 class="" style="font-weight: bold">Soal No. <span
                                                                         class="badge badge-primary no-soal">{{ $no }}</span>
@@ -67,15 +70,18 @@
                                                         </div>
 
                                                         <div class="widget p-3 mt-3">
-                                                            <div class="widget-heading" style="border-bottom: 1px solid #e0e6ed;">
-                                                                <h6 class="question-title color-green" style="word-wrap: break-word">
+                                                            <div class="widget-heading"
+                                                                style="border-bottom: 1px solid #e0e6ed;">
+                                                                <h6 class="question-title color-green"
+                                                                    style="word-wrap: break-word">
                                                                     {!! $soal->soal !!}
                                                                 </h6>
                                                             </div>
                                                             <div class="widget-content mt-3">
                                                                 <div class="alert alert-danger hidden"></div>
                                                                 <div class="green-radio color-green">
-                                                                    <ol type="A" style="color: #000; margin-left: -20px;">
+                                                                    <ol type="A"
+                                                                        style="color: #000; margin-left: -20px;">
                                                                         <li class="answer-number">
                                                                             <label
                                                                                 for="answer-{{ $soal->id }}-{{ substr($soal->pg_1, 0, 1) }}"
@@ -126,10 +132,12 @@
                                             </div>
                                             <!-- SOAL -->
 
-                                            <input type="hidden" value="1" id="currentQuestionNumber" name="currentQuestionNumber" />
-                                            <input type="hidden" value="{{ $ujian->detailujian->count() }}" id="totalOfQuestion"
-                                                name="totalOfQuestion" />
-                                            <input type="hidden" value="[]" id="markedQuestion" name="markedQuestions" />
+                                            <input type="hidden" value="1" id="currentQuestionNumber"
+                                                name="currentQuestionNumber" />
+                                            <input type="hidden" value="{{ $ujian->detailujian->count() }}"
+                                                id="totalOfQuestion" name="totalOfQuestion" />
+                                            <input type="hidden" value="[]" id="markedQuestion"
+                                                name="markedQuestions" />
                                             <!-- END SOAL -->
                                         </div>
                                     </form>
@@ -151,10 +159,11 @@
                                                         $no = 1;
                                                     @endphp
                                                     @foreach ($ujian->detailujian as $soal)
-                                                        <tr class="question-response-rows" data-question="{{ $no }}"
-                                                            style="cursor: pointer;">
+                                                        <tr class="question-response-rows"
+                                                            data-question="{{ $no }}" style="cursor: pointer;">
                                                             <td style="font-weight: bold;">{{ $no }}</td>
-                                                            <td class="question-response-rows-value">{{ $soal->jawaban }}</td>
+                                                            <td class="question-response-rows-value">{{ $soal->jawaban }}
+                                                            </td>
                                                         </tr>
                                                         @php
                                                             $no++;
@@ -164,11 +173,13 @@
                                                 </tbody>
                                             </table>
                                             <div class="text-nowrap text-center">
-                                                <a href="javascript:void(0)" class="btn btn-success" id="quick-access-prev">
+                                                <a href="javascript:void(0)" class="btn btn-success"
+                                                    id="quick-access-prev">
                                                     &laquo;
                                                 </a>
                                                 <span class="alert alert-info" id="quick-access-info"></span>
-                                                <a href="javascript:void(0)" class="btn btn-success" id="quick-access-next">&raquo;</a>
+                                                <a href="javascript:void(0)" class="btn btn-success"
+                                                    id="quick-access-next">&raquo;</a>
                                             </div>
                                         </div>
                                     </div>
@@ -181,7 +192,8 @@
                                 <div class="col-lg-12 exams-footer p-3">
                                     <div class="row">
                                         <div class="col-sm-1 back-to-prev-question-wrapper text-center">
-                                            <a href="javascript:void(0);" id="back-to-prev-question" class="btn btn-success disabled">
+                                            <a href="javascript:void(0);" id="back-to-prev-question"
+                                                class="btn btn-success disabled">
                                                 Back
                                             </a>
                                         </div>
@@ -195,7 +207,8 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-1 go-to-next-question-wrapper text-center">
-                                            <a href="javascript:void(0);" id="go-to-next-question" class="btn btn-success">
+                                            <a href="javascript:void(0);" id="go-to-next-question"
+                                                class="btn btn-success">
                                                 Next
                                             </a>
                                         </div>
@@ -215,15 +228,17 @@
                 <div class="card">
                     <div class="card-header bg-white" id="...">
                         <section class="mb-0 mt-0">
-                            <div role="menu" class="" data-toggle="collapse" data-target="#iconAccordionOne" aria-expanded="true" aria-controls="iconAccordionOne" style="cursor: pointer;">
+                            <div role="menu" class="" data-toggle="collapse" data-target="#iconAccordionOne"
+                                aria-expanded="true" aria-controls="iconAccordionOne" style="cursor: pointer;">
                                 Nilai Siswa (Klik untuk lihat & tutup)
                             </div>
                         </section>
                     </div>
 
-                    <div id="iconAccordionOne" class="collapse show" aria-labelledby="..." data-parent="#iconsAccordion">
+                    <div id="iconAccordionOne" class="collapse show" aria-labelledby="..."
+                        data-parent="#iconsAccordion">
                         <div class="card-body">
-                        
+
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="widget p-3 shadow">
@@ -232,9 +247,15 @@
                                         </div>
 
                                         <div class="widget-content pt-3">
-                                            <a href="{{ url('/guru/ujian_cetak/' . $ujian->kode) }}" class="btn btn-info btn-sm" target="_blank"><span data-feather="printer"></span> Cetak</a>
-                                            <a href="{{ url('/guru/ujian_ekspor/' . $ujian->kode) }}" class="btn btn-success btn-sm" target="_blank"><span data-feather="file-text"></span> Ekspor Excel</a>
-                                            <a href="{{ url('/guru/ujian_reset/' . $ujian->kode) }}" class="btn btn-danger btn-sm reset-ujian-siswa"><span data-feather="refresh-ccw"></span> Reset Ujian Siswa</a>
+                                            <a href="{{ url('/guru/ujian_cetak/' . $ujian->kode) }}"
+                                                class="btn btn-info btn-sm" target="_blank"><span
+                                                    data-feather="printer"></span> Cetak</a>
+                                            <a href="{{ url('/guru/ujian_ekspor/' . $ujian->kode) }}"
+                                                class="btn btn-success btn-sm" target="_blank"><span
+                                                    data-feather="file-text"></span> Ekspor Excel</a>
+                                            <a href="{{ url('/guru/ujian_reset/' . $ujian->kode) }}"
+                                                class="btn btn-danger btn-sm reset-ujian-siswa"><span
+                                                    data-feather="refresh-ccw"></span> Reset Ujian Siswa</a>
                                             <div class="table-responsive mt-3">
                                                 <table class="table table-bordered text-nowrap">
                                                     <thead>
@@ -286,10 +307,14 @@
                                                                         {{ round($nilai) }} / 100
                                                                     </td>
                                                                     <td>
-                                                                        <a href="{{ url("/guru/ujian/" . $ujian->kode . "/" . $s->siswa->id) }}" class="btn btn-info btn-sm"><span data-feather="eye"></span></a>
-                                                                        <a href="{{ url("/guru/ujian_reset/" . $ujian->kode . "/" . $s->siswa->id) }}" class="btn btn-danger btn-sm reset-ujian"><span data-feather="refresh-ccw"></span></a>
+                                                                        <a href="{{ url('/guru/ujian/' . $ujian->kode . '/' . $s->siswa->id) }}"
+                                                                            class="btn btn-info btn-sm"><span
+                                                                                data-feather="eye"></span></a>
+                                                                        <a href="{{ url('/guru/ujian_reset/' . $ujian->kode . '/' . $s->siswa->id) }}"
+                                                                            class="btn btn-danger btn-sm reset-ujian"><span
+                                                                                data-feather="refresh-ccw"></span></a>
                                                                     </td>
-                                                                </tr> 
+                                                                </tr>
                                                             @endif
                                                         @endforeach
                                                     </tbody>
@@ -307,7 +332,8 @@
             </div>
 
 
-            <a href="{{ url('/guru/ujian') }}" class="btn btn-danger btn-sm mt-3"><span data-feather="arrow-left-circle"></span> kembali</a>
+            <a href="{{ url('/guru/ujian') }}" class="btn btn-danger btn-sm mt-3"><span
+                    data-feather="arrow-left-circle"></span> kembali</a>
         </div>
         @include('template.footer')
     </div>

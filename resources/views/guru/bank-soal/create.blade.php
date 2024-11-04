@@ -121,6 +121,26 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-lg-8">
+                                            <div class="form-group">
+                                                <label for="">Pembahasan</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon5">
+                                                            <svg viewBox="0 0 24 24" width="24" height="24"
+                                                                stroke="currentColor" stroke-width="2" fill="none"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="css-i6dzq1">
+                                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <textarea name="pembahasan[]" class="form-control form-control-lg" placeholder="Masukkan pembahasan di sini..."
+                                                        aria-label="Pembahasan" aria-describedby="basic-addon5" rows="3" required autocomplete="off"></textarea>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -168,8 +188,8 @@
                             </div>
                             <div class="col-lg-6">
                                 <label for="">Template</label><br>
-                                <a href="{{ url('/summernote/unduh') }}/template-bank_soal-pg-excel.xlsx" class="btn btn-success"
-                                    target="_blank">Download Template</a>
+                                <a href="{{ url('/summernote/unduh') }}/template-bank_soal-pg-excel.xlsx"
+                                    class="btn btn-success" target="_blank">Download Template</a>
                             </div>
                         </div>
                     </div>
@@ -184,7 +204,67 @@
     </div>
     <script>
         $(document).ready(function() {
-            function uploadImage(e,o){var a=new FormData;a.append("image",e),$.ajax({headers:{"X-CSRF-TOKEN":"{{ csrf_token() }}"},url:"{{ route('summernote_upload') }}",cache:!1,contentType:!1,processData:!1,data:a,type:"post",success:function(e){$(o).summernote("insertImage",e)},error:function(e){console.log(e)}})}function deleteImage(e){$.ajax({headers:{"X-CSRF-TOKEN":"{{ csrf_token() }}"},data:{src:e},type:"post",url:"{{ route('summernote_delete') }}",cache:!1,success:function(e){console.log(e)}})}setInterval(()=>{$(".summernote").summernote({placeholder:"Hello stand alone ui",tabsize:2,height:120,toolbar:[["style",["style"]],["font",["bold","underline","clear"]],["color",["color"]],["para",["ul","ol","paragraph"]],["table",["table"]],["insert",["link","picture","video"]],["view",["fullscreen","help"]]],callbacks:{onImageUpload:function(e,o=this){uploadImage(e[0],o)},onMediaDelete:function(e){deleteImage(e[0].src)}}})},1e3);
+            function uploadImage(e, o) {
+                var a = new FormData;
+                a.append("image", e), $.ajax({
+                    headers: {
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    url: "{{ route('summernote_upload') }}",
+                    cache: !1,
+                    contentType: !1,
+                    processData: !1,
+                    data: a,
+                    type: "post",
+                    success: function(e) {
+                        $(o).summernote("insertImage", e)
+                    },
+                    error: function(e) {
+                        console.log(e)
+                    }
+                })
+            }
+
+            function deleteImage(e) {
+                $.ajax({
+                    headers: {
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    data: {
+                        src: e
+                    },
+                    type: "post",
+                    url: "{{ route('summernote_delete') }}",
+                    cache: !1,
+                    success: function(e) {
+                        console.log(e)
+                    }
+                })
+            }
+            setInterval(() => {
+                $(".summernote").summernote({
+                    placeholder: "Hello stand alone ui",
+                    tabsize: 2,
+                    height: 120,
+                    toolbar: [
+                        ["style", ["style"]],
+                        ["font", ["bold", "underline", "clear"]],
+                        ["color", ["color"]],
+                        ["para", ["ul", "ol", "paragraph"]],
+                        ["table", ["table"]],
+                        ["insert", ["link", "picture", "video"]],
+                        ["view", ["fullscreen", "help"]]
+                    ],
+                    callbacks: {
+                        onImageUpload: function(e, o = this) {
+                            uploadImage(e[0], o)
+                        },
+                        onMediaDelete: function(e) {
+                            deleteImage(e[0].src)
+                        }
+                    }
+                })
+            }, 1e3);
             var no_soal = 2;
             $('.tambah-pg').click(function() {
                 const pg = `
@@ -273,7 +353,9 @@
                 $('#soal_pg').append(pg);
                 no_soal++;
             });
-            $("#soal_pg").on("click",".isi_soal a",function(){$(this).parents(".isi_soal").remove(),--no_soal});
+            $("#soal_pg").on("click", ".isi_soal a", function() {
+                $(this).parents(".isi_soal").remove(), --no_soal
+            });
         })
     </script>
 

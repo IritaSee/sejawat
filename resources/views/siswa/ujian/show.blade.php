@@ -250,10 +250,28 @@
                                 @php
                                     $no = 1;
                                 @endphp
-                                @foreach ($pg_siswa as $soal)
+                                {{-- @foreach ($pg_siswa as $soal)
                                     <div class="question-response-rows d-inline" data-question="{{ $no }}">
                                         <button
                                             class="btn @if ($soal->ragu == null && $soal->jawaban == null) btn-white @endif shadow mt-2 question-response-rows-value @if ($soal->jawaban !== null) btn-info @endif @if ($soal->ragu !== null) btn-warning @endif"
+                                            id="soalId{{ $soal->detailujian->id }}"
+                                            style="width: 40px; height: 40px; font-weight: bold;">
+                                            {{ $no }}
+                                        </button>
+                                    </div>
+                                    @php
+                                        $no++;
+                                    @endphp
+                                @endforeach --}}
+                                @foreach ($pg_siswa as $soal)
+                                    <div class="question-response-rows d-inline" data-question="{{ $no }}">
+                                        <button
+                                            class="btn 
+                                        @if ($soal->benar == 1) btn-success 
+                                        @elseif ($soal->benar == 0) btn-danger 
+                                        @elseif ($soal->ragu == 1) btn-warning 
+                                        @else btn-white @endif 
+                                        shadow mt-2 question-response-rows-value"
                                             id="soalId{{ $soal->detailujian->id }}"
                                             style="width: 40px; height: 40px; font-weight: bold;">
                                             {{ $no }}
@@ -373,6 +391,19 @@
                                                         @if ($soal->ragu == '1')
                                                             <span class="badge badge-warning">Ragu - Ragu</span>
                                                         @endif
+                                                    </div>
+
+                                                    <!-- Penambahan Kunci Jawaban -->
+                                                    <div class="mt-2" style="font-weight: bold;">
+                                                        Kunci Jawaban :
+                                                        <span
+                                                            class="badge badge-info">{{ $soal->detailujian->jawaban }}</span>
+                                                    </div>
+
+                                                    <!-- Penambahan Pembahasan -->
+                                                    <div class="mt-3">
+                                                        <h6>Pembahasan:</h6>
+                                                        <p>{!! $soal->detailujian->pembahasan !!}</p>
                                                     </div>
 
                                                 </div>
@@ -503,7 +534,7 @@
                                 @php
                                     $no = 1;
                                 @endphp
-                                @foreach ($pg_siswa as $soal)
+                                {{-- @foreach ($pg_siswa as $soal)
                                     <div class="question-response-rows d-inline" data-question="{{ $no }}">
                                         <button
                                             class="btn @if ($soal->ragu == null && $soal->jawaban == null) btn-white @endif shadow mt-2 question-response-rows-value @if ($soal->jawaban !== null) btn-info @endif @if ($soal->ragu !== null) btn-warning @endif"
@@ -515,7 +546,26 @@
                                     @php
                                         $no++;
                                     @endphp
+                                @endforeach --}}
+                                @foreach ($pg_siswa as $soal)
+                                    <div class="question-response-rows d-inline" data-question="{{ $no }}">
+                                        <button
+                                            class="btn 
+                                            @if ($soal->benar == 1) btn-success 
+                                            @elseif ($soal->benar == 0) btn-danger 
+                                            @elseif ($soal->ragu == 1) btn-warning 
+                                            @else btn-white @endif 
+                                            shadow mt-2 question-response-rows-value"
+                                            id="soalId{{ $soal->detailujian->id }}"
+                                            style="width: 40px; height: 40px; font-weight: bold;">
+                                            {{ $no }}
+                                        </button>
+                                    </div>
+                                    @php
+                                        $no++;
+                                    @endphp
                                 @endforeach
+
                                 <div class="mt-3">
                                     <span class="badge badge-info text-info" style="padding: 0px 6px;">-</span> = Sudah
                                     dikerjakan

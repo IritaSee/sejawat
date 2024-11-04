@@ -15,8 +15,10 @@
                         <div class="widget shadow p-3">
                             <div class="widget-heading">
                                 <h5 class="">Ujian Pilihan Ganda</h5>
-                                <a href="javascript:void(0);" class="btn btn-primary my-2" data-toggle="modal" data-target="#excel_ujian">Import Excel</a>
-                                <a href="javascript:void(0);" class="btn btn-success my-2" data-toggle="modal" data-target="#bank_soal">Bank Soal</a>
+                                <a href="javascript:void(0);" class="btn btn-primary my-2" data-toggle="modal"
+                                    data-target="#excel_ujian">Import Excel</a>
+                                <a href="javascript:void(0);" class="btn btn-success my-2" data-toggle="modal"
+                                    data-target="#bank_soal">Bank Soal</a>
                                 <div class="row mt-2">
                                     <div class="col-lg-4">
                                         <div class="form-group">
@@ -66,7 +68,8 @@
                                 <div class="row mt-2">
                                     <div class="col-lg-12">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck1" name="acak" value="1">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck1"
+                                                name="acak" value="1">
                                             <label class="custom-control-label" for="customCheck1">Acak Soal Siswa</label>
                                         </div>
                                     </div>
@@ -167,6 +170,26 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-lg-8">
+                                            <div class="form-group">
+                                                <label for="">Pembahasan</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon5">
+                                                            <svg viewBox="0 0 24 24" width="24" height="24"
+                                                                stroke="currentColor" stroke-width="2" fill="none"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="css-i6dzq1">
+                                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <textarea name="pembahasan[]" class="form-control form-control-lg" placeholder="Masukkan pembahasan di sini..."
+                                                        aria-label="Pembahasan" aria-describedby="basic-addon5" rows="3" required autocomplete="off"></textarea>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -242,7 +265,8 @@
                         <div class="row mt-2">
                             <div class="col-lg-12">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="acak" name="e_acak" value="1">
+                                    <input type="checkbox" class="custom-control-input" id="acak" name="e_acak"
+                                        value="1">
                                     <label class="custom-control-label" for="acak">Acak Soal Siswa</label>
                                 </div>
                             </div>
@@ -329,7 +353,8 @@
                         <div class="row mt-2">
                             <div class="col-lg-12">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="b_acak" name="b_acak" value="1">
+                                    <input type="checkbox" class="custom-control-input" id="b_acak" name="b_acak"
+                                        value="1">
                                     <label class="custom-control-label" for="b_acak">Acak Soal Siswa</label>
                                 </div>
                             </div>
@@ -354,8 +379,10 @@
                                                         <td>
                                                             <div class="n-chk">
                                                                 <label class="new-control new-radio radio-classic-primary">
-                                                                <input type="radio" class="new-control-input" name="kode_bank" value="{{ $bs->kode }}" required>
-                                                                <span class="new-control-indicator"></span>Pilih
+                                                                    <input type="radio" class="new-control-input"
+                                                                        name="kode_bank" value="{{ $bs->kode }}"
+                                                                        required>
+                                                                    <span class="new-control-indicator"></span>Pilih
                                                                 </label>
                                                             </div>
                                                         </td>
@@ -369,7 +396,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="reset" value="reset" class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Cancel</button>
+                        <button type="reset" value="reset" class="btn" data-dismiss="modal"><i
+                                class="flaticon-cancel-12"></i> Cancel</button>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </div>
@@ -378,7 +406,67 @@
     </div>
     <script>
         $(document).ready(function() {
-            function uploadImage(e,o){var a=new FormData;a.append("image",e),$.ajax({headers:{"X-CSRF-TOKEN":"{{ csrf_token() }}"},url:"{{ route('summernote_upload') }}",cache:!1,contentType:!1,processData:!1,data:a,type:"post",success:function(e){$(o).summernote("insertImage",e)},error:function(e){console.log(e)}})}function deleteImage(e){$.ajax({headers:{"X-CSRF-TOKEN":"{{ csrf_token() }}"},data:{src:e},type:"post",url:"{{ route('summernote_delete') }}",cache:!1,success:function(e){console.log(e)}})}setInterval(()=>{$(".summernote").summernote({placeholder:"Hello stand alone ui",tabsize:2,height:120,toolbar:[["style",["style"]],["font",["bold","underline","clear"]],["color",["color"]],["para",["ul","ol","paragraph"]],["table",["table"]],["insert",["link","picture","video"]],["view",["fullscreen","help"]]],callbacks:{onImageUpload:function(e,o=this){uploadImage(e[0],o)},onMediaDelete:function(e){deleteImage(e[0].src)}}})},1e3);
+            function uploadImage(e, o) {
+                var a = new FormData;
+                a.append("image", e), $.ajax({
+                    headers: {
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    url: "{{ route('summernote_upload') }}",
+                    cache: !1,
+                    contentType: !1,
+                    processData: !1,
+                    data: a,
+                    type: "post",
+                    success: function(e) {
+                        $(o).summernote("insertImage", e)
+                    },
+                    error: function(e) {
+                        console.log(e)
+                    }
+                })
+            }
+
+            function deleteImage(e) {
+                $.ajax({
+                    headers: {
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    data: {
+                        src: e
+                    },
+                    type: "post",
+                    url: "{{ route('summernote_delete') }}",
+                    cache: !1,
+                    success: function(e) {
+                        console.log(e)
+                    }
+                })
+            }
+            setInterval(() => {
+                $(".summernote").summernote({
+                    placeholder: "Hello stand alone ui",
+                    tabsize: 2,
+                    height: 120,
+                    toolbar: [
+                        ["style", ["style"]],
+                        ["font", ["bold", "underline", "clear"]],
+                        ["color", ["color"]],
+                        ["para", ["ul", "ol", "paragraph"]],
+                        ["table", ["table"]],
+                        ["insert", ["link", "picture", "video"]],
+                        ["view", ["fullscreen", "help"]]
+                    ],
+                    callbacks: {
+                        onImageUpload: function(e, o = this) {
+                            uploadImage(e[0], o)
+                        },
+                        onMediaDelete: function(e) {
+                            deleteImage(e[0].src)
+                        }
+                    }
+                })
+            }, 1e3);
             var no_soal = 2;
             $('.tambah-pg').click(function() {
                 const pg = `
@@ -467,7 +555,9 @@
                 $('#soal_pg').append(pg);
                 no_soal++;
             });
-            $("#soal_pg").on("click",".isi_soal a",function(){$(this).parents(".isi_soal").remove(),--no_soal});
+            $("#soal_pg").on("click", ".isi_soal a", function() {
+                $(this).parents(".isi_soal").remove(), --no_soal
+            });
         });
         // $(document).ready(function(){$(".data-tabel-bank-soal").on("click",function(e){var t=$(this);e.preventDefault(),swal({title:"yakin di hapus?",text:"data yang berkaitan akan dihapus dan tidak bisa di kembalikan!",type:"warning",showCancelButton:!0,cancelButtonText:"tidak",confirmButtonText:"ya, hapus",padding:"2em"}).then(function(e){e.value&&t.parent("form").submit()})}),$("#datatable-table").DataTable({scrollY:"300px",scrollX:!0,scrollCollapse:!0,paging:!0,oLanguage:{oPaginate:{sPrevious:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>',sNext:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>'},sInfo:"tampilkan halaman _PAGE_ dari _PAGES_",sSearch:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',sSearchPlaceholder:"Cari Data...",sLengthMenu:"Hasil :  _MENU_"},stripeClasses:[],lengthMenu:[[-1,5,10,25,50],["All",5,10,25,50]]})});
     </script>

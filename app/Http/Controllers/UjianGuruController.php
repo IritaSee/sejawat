@@ -631,6 +631,7 @@ class UjianGuruController extends Controller
      */
     public function edit(Ujian $ujian)
     {
+        
     }
 
     /**

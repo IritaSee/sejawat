@@ -250,7 +250,7 @@
                                 @php
                                     $no = 1;
                                 @endphp
-                                {{-- @foreach ($pg_siswa as $soal)
+                                @foreach ($pg_siswa as $soal)
                                     <div class="question-response-rows d-inline" data-question="{{ $no }}">
                                         <button
                                             class="btn @if ($soal->ragu == null && $soal->jawaban == null) btn-white @endif shadow mt-2 question-response-rows-value @if ($soal->jawaban !== null) btn-info @endif @if ($soal->ragu !== null) btn-warning @endif"
@@ -262,8 +262,8 @@
                                     @php
                                         $no++;
                                     @endphp
-                                @endforeach --}}
-                                @foreach ($pg_siswa as $soal)
+                                @endforeach
+                                {{-- @foreach ($pg_siswa as $soal)
                                     <div class="question-response-rows d-inline" data-question="{{ $no }}">
                                         <button
                                             class="btn 
@@ -280,7 +280,7 @@
                                     @php
                                         $no++;
                                     @endphp
-                                @endforeach
+                                @endforeach --}}
                                 <div class="mt-3">
                                     <span class="badge badge-info text-info" style="padding: 0px 6px;">-</span> = Sudah
                                     dikerjakan

@@ -27,6 +27,8 @@ class BankpgImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithValid
             'pg_5' => ['required'],
             'jawaban' => ['required'],
             'pemabahasan' => ['required'],
+            'pemabahasan_full' => ['required'],
+            'tipe_soal' => ['required']
         ];
     }
 
@@ -46,7 +48,9 @@ class BankpgImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithValid
             'pg_4' => 'D. ' . $row['pg_4'],
             'pg_5' => 'E. ' . $row['pg_5'],
             'jawaban' => $row['jawaban'],
-            'pembahasan' => $row['pembahasan']
+            'pembahasan' => $row['pembahasan'],
+            'pembahasan_full' => $row['pembahasan_full'],
+            'tipe_soal' => $row['tipe_soal']
         ]);
     }
 }

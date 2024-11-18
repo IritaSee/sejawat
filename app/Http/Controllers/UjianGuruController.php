@@ -149,7 +149,9 @@ class UjianGuruController extends Controller
                 'pg_4' => 'D. ' . $request->pg_4[$index],
                 'pg_5' => 'E. ' . $request->pg_5[$index],
                 'jawaban' => $request->jawaban[$index],
-                'pembahasan' => $request->pembahasan[$index]
+                'pembahasan' => $request->pembahasan[$index],
+                'pembahasan_full' => $request->pembahasan_full[$index],
+                'tipe_soal' => $request->tipe_soal[$index]
             ]);
 
             $index++;
@@ -321,7 +323,9 @@ class UjianGuruController extends Controller
                 'pg_4' => $soal->pg_4,
                 'pg_5' => $soal->pg_5,
                 'jawaban' => $soal->jawaban,
-                'pembahasan' => $soal->pembahasan
+                'pembahasan' => $soal->pembahasan,
+                'pembahasan_full' => $soal->pembahasan_full,
+                'tipe_soal' => $soal->tipe_soal
 
             ]);
 

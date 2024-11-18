@@ -48,6 +48,29 @@
                                             <label for="">Soal No. {{ $index_soal }}</label>
                                             <textarea name="soal[]" cols="30" rows="2" class="summernote" wrap="hard" required>{{ $soal->soal }}</textarea>
                                         </div>
+
+                                        <div class="form-group">
+                                            <label for="">Tipe Soal</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon7">
+                                                        <svg viewBox="0 0 24 24" width="24" height="24"
+                                                            stroke="currentColor" stroke-width="2" fill="none"
+                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                            class="css-i6dzq1">
+                                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                                <input type="text" name="tipe_soal[]" class="form-control"
+                                                    placeholder="Contoh: 1" autocomplete="off" required
+                                                    value="{{ $soal->tipe_soal }}">
+                                            </div>
+                                        </div>
+
+
+
+
                                         <div class="row mt-2">
                                             <div class="col-lg-4">
                                                 <div class="form-group">
@@ -154,6 +177,29 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label for="">Pembahasan Lengkap</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="basic-addon6">
+                                                                <svg viewBox="0 0 24 24" width="24" height="24"
+                                                                    stroke="currentColor" stroke-width="2" fill="none"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    class="css-i6dzq1">
+                                                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                        <input type="url" name="pembahasan_full[]"
+                                                            class="form-control"
+                                                            placeholder="Contoh: https://example.com/pembahasan"
+                                                            autocomplete="off" value="{{ $soal->pembahasan_full }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                         @if ($index_soal != 1)
                                             <a href="javascript:void(0);" class="btn btn-danger hapus-pg">Hapus</a>
@@ -250,6 +296,22 @@
                             <label for="">Soal No . ` + no_soal + `</label>
                             <textarea name="soal[]" cols="30" rows="2" class="summernote" wrap="hard" required></textarea>
                         </div>
+                         <div class="form-group">
+                            <label for="">Tipe Soal</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon7">
+                                        <svg viewBox="0 0 24 24" width="24" height="24"
+                                            stroke="currentColor" stroke-width="2" fill="none"
+                                            stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                    </span>
+                                </div>
+                                <input type="text" name="tipe_soal[]" class="form-control"
+                                    placeholder="Contoh : 1" autocomplete="off" required>
+                            </div>
+                        </div>
                         <div class="row mt-2">
                             <div class="col-lg-4">
                                 <div class="form-group">
@@ -322,7 +384,7 @@
                                 </div>
                             </div>
                                      <!-- Tambahkan Kolom Pembahasan di Sini -->
-                            <div class="col-lg-12">
+                            <div class="col-lg-8">
                                 <div class="form-group">
                                     <label for="">Pembahasan</label>
                                     <div class="input-group">
@@ -346,6 +408,27 @@
                                     </div>
                                 </div>
                             </div>
+                           <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="">Pembahasan Lengkap</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon6">
+                                                <svg viewBox="0 0 24 24" width="24" height="24"
+                                                    stroke="currentColor" stroke-width="2" fill="none"
+                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                    class="css-i6dzq1">
+                                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <input type="url" name="pembahasan_full[]" class="form-control"
+                                            placeholder="Contoh: https://example.com/pembahasan"
+                                            autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                         <a href="javascript:void(0);" class="btn btn-danger hapus-pg">Hapus</a>
                     </div>

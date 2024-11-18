@@ -64,12 +64,25 @@
                                             data-question="{{ $no }}">
                                             <div class="widget-heading pl-2 pt-2" style="border-bottom: 1px solid #e0e6ed;">
                                                 <div class="">
-                                                    <h6 class="" style="font-weight: bold">Soal No. <span
-                                                            class="badge badge-primary no-soal"
+                                                    <h6 class="" style="font-weight: bold">
+                                                        Soal No. <span class="badge badge-primary no-soal"
                                                             style="font-size: 1rem">{{ $no }}</span>
+                                                        <!-- Penambahan Tipe Soal -->
+                                                        <span class="badge badge-info ml-2" style="font-size: 0.9rem;">
+                                                            Tipe Soal:
+                                                            {{ ucfirst(str_replace('_', ' ', $soal->detailujian->tipe_soal)) }}
+                                                        </span>
                                                     </h6>
+                                                    <!-- Jika Anda masih ingin menampilkan tipe_soal secara terpisah, Anda bisa menghapus atau mempertahankannya -->
+                                                    <!--
+                                                                            <h6 class="question-title color-green" style="word-wrap: break-word">
+                                                                                {!! $soal->detailujian->tipe_soal !!}
+                                                                            </h6>
+                                                                            -->
                                                 </div>
                                             </div>
+
+
 
                                             <div class="widget p-3 mt-3">
                                                 <div class="widget-heading" style="border-bottom: 1px solid #e0e6ed;">
@@ -77,6 +90,8 @@
                                                         {!! $soal->detailujian->soal !!}
                                                     </h6>
                                                 </div>
+
+
                                                 <div class="widget-content mt-3" style="position: relative;">
                                                     <div class="alert alert-danger hidden"></div>
                                                     <div class="timer-check hidden"
@@ -319,12 +334,19 @@
                                             <div class="widget-heading pl-2 pt-2"
                                                 style="border-bottom: 1px solid #e0e6ed;">
                                                 <div class="">
-                                                    <h6 class="" style="font-weight: bold">Soal No. <span
-                                                            class="badge badge-primary no-soal"
+                                                    <h6 class="" style="font-weight: bold">
+                                                        Soal No. <span class="badge badge-primary no-soal"
                                                             style="font-size: 1rem">{{ $no }}</span>
+                                                        <!-- Penambahan Tipe Soal -->
+                                                        <span class="badge badge-info ml-2" style="font-size: 0.9rem;">
+                                                            Tipe Soal:
+                                                            {{ ucfirst(str_replace('_', ' ', $soal->detailujian->tipe_soal)) }}
+                                                        </span>
                                                     </h6>
                                                 </div>
                                             </div>
+
+
 
                                             <div class="widget p-3 mt-3">
                                                 <div class="widget-heading" style="border-bottom: 1px solid #e0e6ed;">
@@ -408,6 +430,35 @@
 
                                                 </div>
                                             </div>
+
+                                            <div class="widget-heading pl-2 pt-2"
+                                                style="border-bottom: 1px solid #e0e6ed;">
+                                                <div class="d-flex justify-content-between align-items-center">
+
+                                                    <div>
+                                                        <!-- Penambahan Tombol Pembahasan Lengkap dengan Styling yang Lebih Baik -->
+                                                        @if ($soal->detailujian->pembahasan_full)
+                                                            <a href="{{ $soal->detailujian->pembahasan_full }}"
+                                                                target="_blank"
+                                                                class="btn btn-primary btn-sm d-flex align-items-center">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor"
+                                                                    class="bi bi-book-fill mr-1" viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M8 1.783C7.718.936 7.14.407 6.5.407a2.494 2.494 0 0 0-2.5 2.5c0 .702.403 1.39 1.05 1.91C5.296 5.07 6.23 5.555 7.5 5.555c1.27 0 2.204-.485 2.95-1.238A2.494 2.494 0 0 0 10.5 3.907c0-1.093-.684-2.005-1.557-2.124C8.86.684 8.282 1.215 8 1.783zM1 4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4zm4.5 3a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z" />
+                                                                </svg>
+                                                                Pembahasan Lengkap
+                                                            </a>
+                                                        @else
+                                                            <button type="button" class="btn btn-primary btn-sm"
+                                                                disabled>
+                                                                Pembahasan Lengkap
+                                                            </button>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+
 
                                         </div>
 

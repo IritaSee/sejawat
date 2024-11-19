@@ -19,43 +19,103 @@ class TugasSiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function index()
+    // {
+    //     $notif_tugas = TugasSiswa::where('siswa_id', session()->get('id'))
+    //         ->where('date_send', null)
+    //         ->get();
+    //     $notif_ujian = WaktuUjian::where('siswa_id', session()->get('id'))
+    //         ->where('selesai', null)
+    //         ->get();
+    //     $siswa = Siswa::firstWhere('id', session()->get('id'));
+    //     return view('siswa.tugas.index', [
+    //         'title' => 'Data Tugas',
+    //         'plugin' => '
+    //             <link rel="stylesheet" type="text/css" href="' . url("/assets/cbt-malela") . '/plugins/table/datatable/datatables.css">
+    //             <link rel="stylesheet" type="text/css" href="' . url("/assets/cbt-malela") . '/plugins/table/datatable/dt-global_style.css">
+    //             <script src="' . url("/assets/cbt-malela") . '/plugins/table/datatable/datatables.js"></script>
+    //             <script src="https://cdn.datatables.net/fixedcolumns/4.1.0/js/dataTables.fixedColumns.min.js"></script>
+    //         ',
+    //         'menu' => [
+    //             'menu' => 'tugas',
+    //             'expanded' => 'tugas'
+    //         ],
+    //         'siswa' => $siswa,
+    //         'tugas' => Tugas::where('kelas_id', $siswa->kelas_id)->get(),
+    //         'notif_tugas' => $notif_tugas,
+    //         'notif_materi' => Notifikasi::where('siswa_id', session()->get('id'))->get(),
+    //         'notif_ujian' => $notif_ujian
+    //     ]);
+    // }
+
     public function index()
     {
-        $notif_tugas = TugasSiswa::where('siswa_id', session()->get('id'))
+        // Mengambil data siswa berdasarkan ID dari sesi
+        $siswa = Siswa::find(session()->get('id'));
+        $kelas_id = $siswa->kelas_id;
+
+        // Mengambil semua tugas yang ditugaskan ke kelas siswa
+        $tugas_kelas = Tugas::where('kelas_id', $kelas_id)->get();
+
+        // Membuat entri TugasSiswa untuk setiap tugas yang belum ada untuk siswa ini
+        foreach ($tugas_kelas as $tugas) {
+            TugasSiswa::firstOrCreate(
+                ['kode' => $tugas->kode, 'siswa_id' => $siswa->id],
+                [
+                    'teks' => null,
+                    'file' => null,
+                    'date_send' => null,
+                    'is_telat' => null,
+                    'nilai' => null,
+                    'catatan_guru' => null,
+                ]
+            );
+        }
+
+        // Mengambil notifikasi tugas yang belum dikirim
+        $notif_tugas = TugasSiswa::where('siswa_id', $siswa->id)
             ->where('date_send', null)
             ->get();
-        $notif_ujian = WaktuUjian::where('siswa_id', session()->get('id'))
+
+        // Mengambil notifikasi ujian yang belum selesai
+        $notif_ujian = WaktuUjian::where('siswa_id', $siswa->id)
             ->where('selesai', null)
             ->get();
-        $siswa = Siswa::firstWhere('id', session()->get('id'));
+
+        // Mengambil notifikasi materi
+        $notif_materi = Notifikasi::where('siswa_id', $siswa->id)->get();
+
+        // Mengambil semua tugas untuk kelas siswa
+        $tugas = Tugas::where('kelas_id', $kelas_id)->get();
+
+        // Mengembalikan view dengan data yang diperlukan
         return view('siswa.tugas.index', [
             'title' => 'Data Tugas',
             'plugin' => '
-                <link rel="stylesheet" type="text/css" href="' . url("/assets/cbt-malela") . '/plugins/table/datatable/datatables.css">
-                <link rel="stylesheet" type="text/css" href="' . url("/assets/cbt-malela") . '/plugins/table/datatable/dt-global_style.css">
-                <script src="' . url("/assets/cbt-malela") . '/plugins/table/datatable/datatables.js"></script>
-                <script src="https://cdn.datatables.net/fixedcolumns/4.1.0/js/dataTables.fixedColumns.min.js"></script>
-            ',
+            <link rel="stylesheet" type="text/css" href="' . url("/assets/cbt-malela") . '/plugins/table/datatable/datatables.css">
+            <link rel="stylesheet" type="text/css" href="' . url("/assets/cbt-malela") . '/plugins/table/datatable/dt-global_style.css">
+            <script src="' . url("/assets/cbt-malela") . '/plugins/table/datatable/datatables.js"></script>
+            <script src="https://cdn.datatables.net/fixedcolumns/4.1.0/js/dataTables.fixedColumns.min.js"></script>
+        ',
             'menu' => [
                 'menu' => 'tugas',
                 'expanded' => 'tugas'
             ],
             'siswa' => $siswa,
-            'tugas' => Tugas::where('kelas_id', $siswa->kelas_id)->get(),
+            'tugas' => $tugas,
             'notif_tugas' => $notif_tugas,
-            'notif_materi' => Notifikasi::where('siswa_id', session()->get('id'))->get(),
+            'notif_materi' => $notif_materi,
             'notif_ujian' => $notif_ujian
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
@@ -83,6 +143,24 @@ class TugasSiswaController extends Controller
         $tugas_siswa = TugasSiswa::where('kode', $tuga->kode)
             ->where('siswa_id', session()->get('id'))
             ->first();
+
+
+        // **Tambahkan blok kode ini di sini**
+        if (!$tugas_siswa) {
+            $tugas_siswa = TugasSiswa::create([
+                'kode' => $tuga->kode,
+                'siswa_id' => session()->get('id'),
+                'teks' => null,
+                'file' => null,
+                'date_send' => null,
+                'is_telat' => null,
+                'nilai' => null,
+                'catatan_guru' => null,
+                // 'created_at' dan 'updated_at' biasanya diisi otomatis oleh Laravel jika menggunakan timestamps
+                // Jadi, jika model Anda menggunakan timestamps, Anda tidak perlu menyertakan ini secara manual
+            ]);
+        }
+        // **Akhir blok kode**
 
         if ($tugas_siswa) {
             $file_siswa = FileModel::where('kode', $tugas_siswa->file)->get();

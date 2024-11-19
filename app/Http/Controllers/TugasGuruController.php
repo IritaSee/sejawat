@@ -75,12 +75,94 @@ class TugasGuruController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    // public function store(Request $request)
+    // {
+    //     $email_settings = EmailSettings::first();
+
+    //     // CEK APAKAH SUDAH ADA SISWA DI KELAS YG MAU DI ISI TUGAS
+    //     $siswa = Siswa::where('kelas_id', $request->kelas)->get();
+    //     if ($siswa->count() == 0) {
+    //         return redirect('/guru/tugas/create')->with('pesan', "
+    //             <script>
+    //                 swal({
+    //                     title: 'Error!',
+    //                     text: 'belum ada siswa di kelas tersebut!',
+    //                     type: 'error',
+    //                     padding: '2em'
+    //                 })
+    //             </script>
+    //         ")->withInput();
+    //     }
+
+    //     $validateTugas = $request->validate([
+    //         'nama_tugas' => 'required',
+    //         'teks' => 'required',
+    //     ]);
+    //     $validateTugas['kode'] = Str::random(20);
+    //     $validateTugas['guru_id'] = session()->get('id');
+    //     $validateTugas['kelas_id'] = $request->kelas;
+    //     $validateTugas['mapel_id'] = $request->mapel;
+    //     $validateTugas['due_date'] = $request->tgl . ' ' . $request->jam;
+
+    //     $email_siswa = '';
+    //     $tugas_siswa = [];
+    //     foreach ($siswa as $s) {
+    //         $email_siswa .= $s->email . ',';
+
+    //         array_push($tugas_siswa, [
+    //             'kode' => $validateTugas['kode'],
+    //             'siswa_id' => $s->id
+    //         ]);
+    //     }
+
+    //     $email_siswa = Str::replaceLast(',', '', $email_siswa);
+    //     $email_siswa = explode(',', $email_siswa);
+
+    //     if ($email_settings->notif_tugas == '1') {
+    //         $details = [
+    //             'nama_guru' => session()->get('nama_guru'),
+    //             'nama_tugas' => $request->nama_tugas,
+    //             'due_date' => $validateTugas['due_date']
+    //         ];
+    //         Mail::to($email_siswa)->send(new NotifTugas($details));
+    //     }
+
+    //     if ($request->file('file_tugas')) {
+    //         $files = [];
+    //         foreach ($request->file('file_tugas') as $file) {
+    //             array_push($files, [
+    //                 'kode' => $validateTugas['kode'],
+    //                 'nama' => Str::replace('assets/files/', '', $file->store('assets/files'))
+    //             ]);
+    //         }
+    //         FileModel::insert($files);
+    //     }
+
+    //     Tugas::create($validateTugas);
+    //     TugasSiswa::insert($tugas_siswa);
+
+    //     return redirect('/guru/tugas')->with('pesan', "
+    //         <script>
+    //             swal({
+    //                 title: 'Success!',
+    //                 text: 'tugas sudah di posting!',
+    //                 type: 'success',
+    //                 padding: '2em'
+    //             })
+    //         </script>
+    //     ");
+    // }
+
     public function store(Request $request)
     {
         $email_settings = EmailSettings::first();
 
-        // CEK APAKAH SUDAH ADA SISWA DI KELAS YG MAU DI ISI TUGAS
+        // Mengambil semua siswa di kelas yang dipilih
         $siswa = Siswa::where('kelas_id', $request->kelas)->get();
+
+        // CEK APAKAH SUDAH ADA SISWA DI KELAS YG MAU DI ISI TUGAS
+        // Jika Anda ingin mengizinkan pembuatan tugas tanpa siswa, hapus atau komentari blok berikut:
+        /*
         if ($siswa->count() == 0) {
             return redirect('/guru/tugas/create')->with('pesan', "
                 <script>
@@ -93,32 +175,31 @@ class TugasGuruController extends Controller
                 </script>
             ")->withInput();
         }
+        */
 
+        // Validasi input
         $validateTugas = $request->validate([
-            'nama_tugas' => 'required',
-            'teks' => 'required',
+            'nama_tugas' => 'required|string|max:255',
+            'teks' => 'required|string',
+            'kelas' => 'required|exists:kelas,id',
+            'mapel' => 'required|exists:mapel,id',
+            'tgl' => 'required|date',
+            'jam' => 'required|date_format:H:i',
+            'file_tugas.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx,zip|max:10240', // Mendukung gambar dan dokumen
         ]);
+
+        // Mengisi data tugas
         $validateTugas['kode'] = Str::random(20);
         $validateTugas['guru_id'] = session()->get('id');
         $validateTugas['kelas_id'] = $request->kelas;
         $validateTugas['mapel_id'] = $request->mapel;
         $validateTugas['due_date'] = $request->tgl . ' ' . $request->jam;
 
-        $email_siswa = '';
-        $tugas_siswa = [];
-        foreach ($siswa as $s) {
-            $email_siswa .= $s->email . ',';
+        // Menyiapkan email siswa
+        $email_siswa = $siswa->pluck('email')->toArray();
 
-            array_push($tugas_siswa, [
-                'kode' => $validateTugas['kode'],
-                'siswa_id' => $s->id
-            ]);
-        }
-
-        $email_siswa = Str::replaceLast(',', '', $email_siswa);
-        $email_siswa = explode(',', $email_siswa);
-
-        if ($email_settings->notif_tugas == '1') {
+        // Mengirim email notifikasi tugas jika diaktifkan dan ada siswa
+        if ($email_settings->notif_tugas == '1' && count($email_siswa) > 0) {
             $details = [
                 'nama_guru' => session()->get('nama_guru'),
                 'nama_tugas' => $request->nama_tugas,
@@ -127,31 +208,49 @@ class TugasGuruController extends Controller
             Mail::to($email_siswa)->send(new NotifTugas($details));
         }
 
+        // Menyimpan file tugas jika ada
         if ($request->file('file_tugas')) {
             $files = [];
             foreach ($request->file('file_tugas') as $file) {
-                array_push($files, [
+                $path = $file->store('assets/files');
+                $files[] = [
                     'kode' => $validateTugas['kode'],
-                    'nama' => Str::replace('assets/files/', '', $file->store('assets/files'))
-                ]);
+                    'nama' => basename($path)
+                ];
             }
             FileModel::insert($files);
         }
 
-        Tugas::create($validateTugas);
-        TugasSiswa::insert($tugas_siswa);
+        // Membuat tugas
+        $tugas = Tugas::create($validateTugas);
+
+        // Membuat asosiasi tugas dengan siswa jika ada siswa
+        if ($siswa->count() > 0) {
+            $tugas_siswa = $siswa->map(function ($s) use ($validateTugas) {
+                return [
+                    'kode' => $validateTugas['kode'],
+                    'siswa_id' => $s->id,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+            })->toArray();
+
+            TugasSiswa::insert($tugas_siswa);
+        }
 
         return redirect('/guru/tugas')->with('pesan', "
             <script>
                 swal({
                     title: 'Success!',
-                    text: 'tugas sudah di posting!',
+                    text: 'Tugas sudah diposting!',
                     type: 'success',
                     padding: '2em'
                 })
             </script>
         ");
     }
+
+
 
     /**
      * Display the specified resource.
@@ -329,8 +428,9 @@ class TugasGuruController extends Controller
             </script>
         ");
     }
-    
-    public function tugas_cetak(Tugas $tugas) {
+
+    public function tugas_cetak(Tugas $tugas)
+    {
         $tugas_siswa = TugasSiswa::where('kode', $tugas->kode)->get();
         return view('guru.tugas.cetak-tugas', [
             'tugas'  => $tugas,

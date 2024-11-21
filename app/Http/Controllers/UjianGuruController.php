@@ -296,18 +296,18 @@ class UjianGuruController extends Controller
     public function pg_excel(Request $request)
     {
         $siswa = Siswa::where('kelas_id', $request->e_kelas)->get();
-        if ($siswa->count() == 0) {
-            return redirect('/guru/ujian/create')->with('pesan', "
-                <script>
-                    swal({
-                        title: 'Error!',
-                        text: 'belum ada siswa di kelas tersebut!',
-                        type: 'error',
-                        padding: '2em'
-                    })
-                </script>
-            ")->withInput();
-        }
+        // if ($siswa->count() == 0) {
+        //     return redirect('/guru/ujian/create')->with('pesan', "
+        //         <script>
+        //             swal({
+        //                 title: 'Error!',
+        //                 text: 'belum ada siswa di kelas tersebut!',
+        //                 type: 'error',
+        //                 padding: '2em'
+        //             })
+        //         </script>
+        //     ")->withInput();
+        // }
 
         $kode = Str::random(30);
         $ujian = [
@@ -478,19 +478,19 @@ class UjianGuruController extends Controller
     // Mengambil detail bank soal
     $detail_bank_soal = DetailbankpgModel::where('kode', $request->kode_bank)->get();
 
-    // Jika tidak ada data bank soal, redirect dengan pesan error
-    if ($detail_bank_soal->count() == 0) {
-        return redirect('/guru/ujian/create')->with('pesan', "
-            <script>
-                swal({
-                    title: 'Error!',
-                    text: 'Data Bank soal tidak ditemukan!',
-                    type: 'error',
-                    padding: '2em'
-                })
-            </script>
-        ")->withInput();
-    }
+    // // Jika tidak ada data bank soal, redirect dengan pesan error
+    // if ($detail_bank_soal->count() == 0) {
+    //     return redirect('/guru/ujian/create')->with('pesan', "
+    //         <script>
+    //             swal({
+    //                 title: 'Error!',
+    //                 text: 'Data Bank soal tidak ditemukan!',
+    //                 type: 'error',
+    //                 padding: '2em'
+    //             })
+    //         </script>
+    //     ")->withInput();
+    // }
 
     // Membuat kode ujian unik
     $kode = Str::random(30);
@@ -580,18 +580,18 @@ class UjianGuruController extends Controller
     public function store_essay(Request $request)
     {
         $siswa = Siswa::where('kelas_id', $request->kelas)->get();
-        if ($siswa->count() == 0) {
-            return redirect('/guru/ujian_essay')->with('pesan', "
-                <script>
-                    swal({
-                        title: 'Error!',
-                        text: 'belum ada siswa di kelas tersebut!',
-                        type: 'error',
-                        padding: '2em'
-                    })
-                </script>
-            ")->withInput();
-        }
+        // if ($siswa->count() == 0) {
+        //     return redirect('/guru/ujian_essay')->with('pesan', "
+        //         <script>
+        //             swal({
+        //                 title: 'Error!',
+        //                 text: 'belum ada siswa di kelas tersebut!',
+        //                 type: 'error',
+        //                 padding: '2em'
+        //             })
+        //         </script>
+        //     ")->withInput();
+        // }
 
         $kode = Str::random(30);
         $ujian = [
@@ -661,18 +661,18 @@ class UjianGuruController extends Controller
     public function store_bank_essay(Request $request)
     {
         $siswa = Siswa::where('kelas_id', $request->b_kelas)->get();
-        if ($siswa->count() == 0) {
-            return redirect('/guru/ujian_essay')->with('pesan', "
-                <script>
-                    swal({
-                        title: 'Error!',
-                        text: 'belum ada siswa di kelas tersebut!',
-                        type: 'error',
-                        padding: '2em'
-                    })
-                </script>
-            ")->withInput();
-        }
+        // if ($siswa->count() == 0) {
+        //     return redirect('/guru/ujian_essay')->with('pesan', "
+        //         <script>
+        //             swal({
+        //                 title: 'Error!',
+        //                 text: 'belum ada siswa di kelas tersebut!',
+        //                 type: 'error',
+        //                 padding: '2em'
+        //             })
+        //         </script>
+        //     ")->withInput();
+        // }
 
         $detail_bank_soal = DetailbankessayModel::where('kode', $request->kode_bank)->get();
 

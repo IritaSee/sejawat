@@ -15,11 +15,11 @@
                     <div class="col-lg-12 layout-spacing">
                         <div class="widget shadow p-3">
                             <div class="widget-heading">
-                                <h5 class="">Edit Bank Soal Ujian Pilihan Ganda</h5>
+                                <h5 class="">Edit Bank Soal Tryout Pilihan Ganda</h5>
                                 <div class="row mt-2">
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="">Nama Ujian / Quiz</label>
+                                            <label for="">Nama Tryout / Quiz</label>
                                             <input type="text" name="nama" class="form-control"
                                                 value="{{ $bank_soal->nama }}" required>
                                         </div>
@@ -33,7 +33,7 @@
                     <div class="col-lg-12 layout-spacing">
                         <div class="widget shadow p-3">
                             <div class="widget-heading">
-                                <h5 class="">Soal Ujian</h5>
+                                <h5 class="">Soal Tryout</h5>
                             </div>
                             <div id="soal_pg">
                                 @php

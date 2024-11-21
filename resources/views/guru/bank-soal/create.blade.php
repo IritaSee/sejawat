@@ -14,13 +14,13 @@
                     <div class="col-lg-12 layout-spacing">
                         <div class="widget shadow p-3">
                             <div class="widget-heading">
-                                <h5 class="">Bank Soal Ujian Pilihan Ganda</h5>
+                                <h5 class="">Bank Soal Tryout Pilihan Ganda</h5>
                                 <a href="javascript:void(0);" class="btn btn-primary my-2" data-toggle="modal"
                                     data-target="#excel_ujian">Import Excel</a>
                                 <div class="row mt-2">
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="">Nama Ujian / Quiz</label>
+                                            <label for="">Nama Tryout / Quiz</label>
                                             <input type="text" name="nama" class="form-control" required>
                                         </div>
                                     </div>
@@ -35,7 +35,7 @@
                     <div class="col-lg-12 layout-spacing">
                         <div class="widget shadow p-3">
                             <div class="widget-heading">
-                                <h5 class="">Soal Ujian</h5>
+                                <h5 class="">Soal Tryout</h5>
                             </div>
                             <div id="soal_pg">
                                 <div class="isi_soal">
@@ -220,7 +220,7 @@
                         <div class="row mt-2">
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <label for="">Nama Ujian / Quiz</label>
+                                    <label for="">Nama Tryout / Quiz</label>
                                     <input type="text" name="e_nama" class="form-control" required>
                                 </div>
                             </div>

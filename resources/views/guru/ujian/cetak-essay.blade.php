@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Nilai Ujian</title>
+    <title>Nilai Tryout</title>
     <link href="{{ url('/assets/cbt-malela') }}/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <h2 class="text-center">NILAI UJIAN</h2>
+    <h2 class="text-center">NILAI TRYOUT</h2>
     <hr>
     <table cellpadding="3">
         <tr>
-            <td>Ujian</td>
+            <td>Tryout</td>
             <td> : {{ $ujian->nama }} | {{ ($ujian->jenis == 0) ? 'Pilihan Ganda' : 'Essay' }}</td>
         </tr>
         <tr>
@@ -42,7 +42,7 @@
                 @if ($s->selesai == null)
                     <tr class="text-center">
                         <td>{{ $s->siswa->nama_siswa }}</td>
-                        <td colspan="3">Belum Mengerjakan Ujian</td>
+                        <td colspan="3">Belum Mengerjakan Tryout</td>
                     </tr>
                 @else
                     <tr class="text-center">

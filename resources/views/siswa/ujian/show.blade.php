@@ -315,7 +315,7 @@
                         <form id="examwizard-question" action="#" method="POST">
                             <div class="widget shadow p-2">
                                 <div class="d-flex float-right">
-                                    <div class="badge badge-success" style="font-size: 14px; font-weight: bold;">ujian
+                                    <div class="badge badge-success" style="font-size: 14px; font-weight: bold;">tryout
                                         selesai</div>
                                 </div>
                                 <div>
@@ -489,7 +489,7 @@
                                 @endforeach
                                 <div class="widget-footer pl-2 py-2 mt-3"
                                     style="border-top: 1px solid #e0e6ed; font-weight: bold;">
-                                    Hasil Ujian
+                                    Hasil Tryout
                                     <div class="table-responsive" style="overflow-x: scroll;">
                                         <table class="text-nowrap">
                                             @php

@@ -12,7 +12,7 @@
                             <h5 class="">Bank Soal {{ $bank_soal->nama }}</h5>
                             <table class="mt-2">
                                 <tr>
-                                    <th>Jenis Ujian</th>
+                                    <th>Jenis Tryout</th>
                                     <th>: {{ ($bank_soal->jenis == 0) ? 'Pilihan Ganda' : 'Essay'; }}</th>
                                 </tr>
                                 <tr>
@@ -34,7 +34,7 @@
                     <div class="card-header bg-white" id="...">
                         <section class="mb-0 mt-0">
                             <div role="menu" class="" data-toggle="collapse" data-target="#defaultAccordionOne" aria-expanded="true" aria-controls="defaultAccordionOne" style="cursor: pointer;">
-                                Soal Ujian & Jawaban (Klik untuk lihat & tutup)
+                                Soal Tryout & Jawaban (Klik untuk lihat & tutup)
                             </div>
                         </section>
                     </div>

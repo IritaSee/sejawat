@@ -50,7 +50,7 @@
                     aria-expanded="{{ $menu['expanded'] == 'ujian' ? 'true' : 'false' }}" class="dropdown-toggle">
                     <div class="">
                         <span data-feather="cast"></span>
-                        <span>Ujian</span>
+                        <span>Tryout</span>
                     </div>
                 </a>
             </li>

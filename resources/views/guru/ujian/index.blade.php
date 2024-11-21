@@ -11,7 +11,7 @@
                         <div class="row">
                             <div class="col-lg-7">
                                 <div class="widget-heading">
-                                    <h5 class="">Ujian / Quiz</h5>
+                                    <h5 class="">Tryout / Quiz</h5>
                                     <a href="javascript:void(0)" class="btn btn-primary mt-3" data-toggle="modal"
                                         data-target="#tambah_ujian">Tambah</a>
                                 </div>
@@ -77,7 +77,7 @@
             <form action="" method="POST" enctype="multipart/form-data">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="tambah_ujianLabel">Tambah Ujian</h5>
+                        <h5 class="modal-title" id="tambah_ujianLabel">Tambah Tryout</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             x
                         </button>

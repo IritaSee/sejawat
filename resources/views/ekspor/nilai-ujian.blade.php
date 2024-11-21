@@ -15,7 +15,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $s->siswa->nama_siswa }}</td>
-                    <td colspan="4">Belum Mengerjakan Ujian</td>
+                    <td colspan="4">Belum Mengerjakan Tryout</td>
                 </tr>
             @else
                 @php

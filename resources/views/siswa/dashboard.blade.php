@@ -127,7 +127,7 @@
                 <div class="col-xl-6 col-lg-12 col-md-6 col-sm-12 col-12 layout-spacing">
                     <div class="widget widget-table-one p-3">
                         <div class="widget-heading">
-                            <h5 class="">Notifikasi Ujian</h5>
+                            <h5 class="">Notifikasi Tryout</h5>
                         </div>
 
                         <div class="widget-content">
@@ -178,7 +178,7 @@
                                     <div class="t-item">
                                         <div class="t-company-name">
                                             <div class="t-name">
-                                                <h4 style="color: #e7515a;">YahoOo.. Tidak ada ujian
+                                                <h4 style="color: #e7515a;">Tidak ada tryout yang belum dikerjakan!
                                                     <span data-feather="smile"></span>
                                                 </h4>
                                             </div>
@@ -260,7 +260,7 @@
                         <div class="widget-content">
                             <div class="header">
                                 <div class="header-body">
-                                    <h6>Hasil Ujian Terbaru</h6>
+                                    <h6>Hasil Tryout Terbaru</h6>
                                 </div>
                             </div>
                             <div class="w-content">
@@ -304,8 +304,8 @@
             e.preventDefault();
             var t = $(this).attr("href");
             swal({
-                title: "yakin mulai ujian?",
-                text: "waktu ujian akan dimulai & tidak bisa berhenti!",
+                title: "yakin mulai Tryout?",
+                text: "waktu Tryout akan dimulai & tidak bisa berhenti!",
                 type: "warning",
                 showCancelButton: !0,
                 cancelButtonText: "tidak",

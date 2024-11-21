@@ -260,16 +260,22 @@
                         <div class="widget-content">
                             <div class="header">
                                 <div class="header-body">
-                                    <h6>Hasil Ujian</h6>
+                                    <h6>Hasil Ujian Terbaru</h6>
                                 </div>
                             </div>
                             <div class="w-content">
                                 <div class="">
                                     <p class="task-left">
-                                        {{ $benar_pg->count() }}
+                                       {{ $nilai }}
                                     </p>
-                                    <p class="task-completed"><span>Ada {{ $salah_pg->count() }} Jawaban Salah</span></p>
-                                    <p class="task-completed"><span>Lebih banyak belajar lagi untuk Tipe Soal : {{ implode(', ', $needs_improvement) }}</span></p>
+                                    <p class="task-completed"><span>Ada {{ $salah }} Jawaban Salah</span></p>
+                                    <p class="task-completed"><span>Tidak Dijawab: {{ $tidakDijawab }}</span></p>
+                                    <p class="task-completed"><span>Nilai: <span class="badge badge-primary">{{ $nilai }} / 100</span></span></p>
+                                    @if (!empty($needs_improvement))
+                                        <p class="task-completed">
+                                            <span>Lebih banyak belajar lagi untuk Tipe Soal: {{ implode(', ', $needs_improvement) }}</span>
+                                        </p>
+                                    @endif
                                 </div>
                             </div>
                         </div>

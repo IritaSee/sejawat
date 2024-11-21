@@ -21,32 +21,69 @@ class SiswaController extends Controller
     {
         $siswa_id = session()->get('id');
         $siswa = Siswa::firstWhere('id', $siswa_id);
+        
+        // Mengambil notifikasi tugas dan ujian
         $notif_tugas = TugasSiswa::where('siswa_id', $siswa_id)
             ->where('date_send', null)
             ->get();
         $notif_ujian = WaktuUjian::where('siswa_id', $siswa_id)
             ->where('selesai', null)
             ->get();
+        
+        // Mengambil materi berdasarkan kelas siswa
         $materi = Materi::where('kelas_id', $siswa->kelas_id)->get();
-        $hasil_pg = PgSiswa::where('siswa_id', $siswa_id)->get();
-        $benar_pg = $hasil_pg->where('benar', 1);
-        $salah_pg = $hasil_pg->where('benar', 0);
+
+        // Mengambil semua hasil ujian pilihan ganda untuk siswa
+        $maxID = PgSiswa::max('id');
+        $hasil_pg = PgSiswa::where('id', $maxID)->first();
+        $count = PgSiswa::where('kode', $hasil_pg->kode)->count();
+
+        // Inisialisasi variabel untuk menghitung jawaban
+        $benar = 0;
+        $salah = 0;
+        $tidakDijawab = 0;
+
+        $soal_pg = PgSiswa::where('kode', $hasil_pg->kode)->get();
+        // Menghitung jumlah jawaban benar, salah, dan tidak dijawab
+        foreach ($soal_pg as $soal) {
+            if ($soal->benar === 1) {
+                $benar++;
+            } elseif ($soal->benar === 0) {
+                $salah++;
+            } else {
+                // Anggap sebagai tidak dijawab jika bukan 0 atau 1
+                $tidakDijawab++;
+            }
+        }
+ 
+        // Menghitung nilai ujian
+        $total_soal_pg = $soal_pg->count();
+        $nilai = $total_soal_pg > 0 ? ($benar / $total_soal_pg) * 100 : 0;
+
+        // Mengambil hasil ujian esai
         $hasil_essay = EssaySiswa::where('siswa_id', $siswa_id)->get();
+
+        // Mengambil detail tipe soal
         $tipe_soal = [];
-        foreach ($hasil_pg as $pg) {
+        foreach ($soal_pg as $pg) {
             $detail = DetailUjian::find($pg->detail_ujian_id);
             if ($detail) {
                 $tipe_soal[$detail->tipe_soal][] = $pg->benar;
             }
         }
+        // Menghitung tipe soal yang perlu ditingkatkan
         $needs_improvement = [];
         foreach ($tipe_soal as $tipe => $results) {
-            $correct_count = count(array_filter($results));
+            $correct_count = count(array_filter($results, function($value) {
+                return $value === 1; // Menghitung jawaban benar
+            }));
             $total_count = count($results);
             if ($total_count > 0 && ($correct_count / $total_count < 0.5)) {
                 $needs_improvement[] = $tipe;
             }
         }
+        
+
 
         return view('siswa.dashboard', [
             'title' => 'Dashboard Siswa',
@@ -67,8 +104,10 @@ class SiswaController extends Controller
             'notif_materi' => Notifikasi::where('siswa_id', $siswa_id)->get(),
             'notif_ujian' => $notif_ujian,
             'hasil_pg' => $hasil_pg,
-            'benar_pg' => $benar_pg,
-            'salah_pg' => $salah_pg,
+            'benar' => $benar,
+            'salah' => $salah,
+            'tidakDijawab' => $tidakDijawab,
+            'nilai' => round($nilai),
             'hasil_essay' => $hasil_essay,
             'needs_improvement' => $needs_improvement,
         ]);

@@ -120,6 +120,32 @@ class SiswaController extends Controller
             'needs_improvement' => $needs_improvement,
         ]);
     }
+
+    public function profile()
+    {
+        $notif_tugas = TugasSiswa::where('siswa_id', session()->get('id'))
+            ->where('date_send', null)
+            ->get();
+        $notif_ujian = WaktuUjian::where('siswa_id', session()->get('id'))
+            ->where('selesai', null)
+            ->get();
+
+        return view('siswa.profile', [
+            'title' => 'My Profile',
+            'plugin' => '
+                <link href="' . url("assets/cbt-malela") . '/assets/css/users/user-profile.css" rel="stylesheet" type="text/css" />
+            ',
+            'menu' => [
+                'menu' => 'profile',
+                'expanded' => 'profile'
+            ],
+            'siswa' => Siswa::firstWhere('id', session()->get('id')),
+            'notif_tugas' => $notif_tugas,
+            'notif_materi' => Notifikasi::where('siswa_id', session()->get('id'))->get(),
+            'notif_ujian' => $notif_ujian
+        ]);
+    }
+
     public function edit_profile(Siswa $siswa, Request $request)
     {
         $rules = [

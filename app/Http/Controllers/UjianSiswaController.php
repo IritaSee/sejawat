@@ -62,6 +62,20 @@ class UjianSiswaController extends Controller
         // Mengambil data siswa berdasarkan ID dari sesi
         $siswa = Siswa::find($siswa_id);
 
+        // if (!$siswa) {
+        //     return redirect('/')->with('pesan', "
+        //         <script>
+        //             swal({
+        //                 title: 'Error!',
+        //                 text: 'Siswa tidak ditemukan!',
+        //                 icon: 'error',
+        //                 timer: 2000,
+        //                 buttons: false,
+        //             })
+        //         </script>
+        //     ");
+        // }
+
         $kelas_id = $siswa->kelas_id;
 
         // Mengambil semua ujian yang ada di kelas siswa
@@ -76,7 +90,7 @@ class UjianSiswaController extends Controller
                 ],
                 [
                     'waktu_berakhir' => null,
-                    'selesai' => 0
+                    'selesai' => null
                 ]
             );
         }
@@ -88,7 +102,7 @@ class UjianSiswaController extends Controller
 
         // Mengambil notifikasi ujian yang belum selesai
         $notif_ujian = WaktuUjian::where('siswa_id', $siswa_id)
-            ->where('selesai', 0)
+            ->where('selesai', null)
             ->get();
 
         // Mengambil notifikasi materi
@@ -188,6 +202,7 @@ class UjianSiswaController extends Controller
         $pg_siswa = PgSiswa::where('kode', $ujian->kode)
             ->where('siswa_id', session()->get('id'))
             ->get();
+
         if ($pg_siswa->count() == 0) {
             $data_pg_siswa = [];
             foreach ($ujian->detailujian as $soal) {

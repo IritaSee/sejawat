@@ -189,7 +189,7 @@ class UjianSiswaController extends Controller
             ->get();
         $notif_ujian = WaktuUjian::where('siswa_id', session()->get('id'))
             ->where('selesai', null)
-            ->get();
+            ->get(); 
 
         $essay_siswa = EssaySiswa::where('kode', $ujian->kode)
             ->where('siswa_id', session()->get('id'))

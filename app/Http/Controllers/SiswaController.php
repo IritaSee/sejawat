@@ -7,6 +7,9 @@ use App\Models\Tugas;
 use App\Models\Materi;
 use App\Models\Notifikasi;
 use App\Models\TugasSiswa;
+use App\Models\PgSiswa;
+use App\Models\EssaySiswa;
+use App\Models\DetailUjian;
 use App\Models\WaktuUjian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -16,13 +19,35 @@ class SiswaController extends Controller
 {
     public function index()
     {
-        $notif_tugas = TugasSiswa::where('siswa_id', session()->get('id'))
+        $siswa_id = session()->get('id');
+        $siswa = Siswa::firstWhere('id', $siswa_id);
+        $notif_tugas = TugasSiswa::where('siswa_id', $siswa_id)
             ->where('date_send', null)
             ->get();
-        $notif_ujian = WaktuUjian::where('siswa_id', session()->get('id'))
+        $notif_ujian = WaktuUjian::where('siswa_id', $siswa_id)
             ->where('selesai', null)
             ->get();
-        $siswa = Siswa::firstWhere('id', session()->get('id'));
+        $materi = Materi::where('kelas_id', $siswa->kelas_id)->get();
+        $hasil_pg = PgSiswa::where('siswa_id', $siswa_id)->get();
+        $benar_pg = $hasil_pg->where('benar', 1);
+        $salah_pg = $hasil_pg->where('benar', 0);
+        $hasil_essay = EssaySiswa::where('siswa_id', $siswa_id)->get();
+        $tipe_soal = [];
+        foreach ($hasil_pg as $pg) {
+            $detail = DetailUjian::find($pg->detail_ujian_id);
+            if ($detail) {
+                $tipe_soal[$detail->tipe_soal][] = $pg->benar;
+            }
+        }
+        $needs_improvement = [];
+        foreach ($tipe_soal as $tipe => $results) {
+            $correct_count = count(array_filter($results));
+            $total_count = count($results);
+            if ($total_count > 0 && ($correct_count / $total_count < 0.5)) {
+                $needs_improvement[] = $tipe;
+            }
+        }
+
         return view('siswa.dashboard', [
             'title' => 'Dashboard Siswa',
             'plugin' => '
@@ -36,11 +61,16 @@ class SiswaController extends Controller
                 'expanded' => 'dashboard'
             ],
             'siswa' => $siswa,
-            'materi' => Materi::where('kelas_id', $siswa->kelas_id)->get(),
-            'tugas' => TugasSiswa::where('siswa_id', session()->get('id'))->get(),
+            'materi' => $materi,
+            'tugas' => TugasSiswa::where('siswa_id', $siswa_id)->get(),
             'notif_tugas' => $notif_tugas,
-            'notif_materi' => Notifikasi::where('siswa_id', session()->get('id'))->get(),
+            'notif_materi' => Notifikasi::where('siswa_id', $siswa_id)->get(),
             'notif_ujian' => $notif_ujian,
+            'hasil_pg' => $hasil_pg,
+            'benar_pg' => $benar_pg,
+            'salah_pg' => $salah_pg,
+            'hasil_essay' => $hasil_essay,
+            'needs_improvement' => $needs_improvement,
         ]);
     }
     public function profile()
@@ -127,7 +157,7 @@ class SiswaController extends Controller
                     type: 'error',
                     padding: '2em'
                 })
-            </script>
+            </script> 
         ");
     }
 }

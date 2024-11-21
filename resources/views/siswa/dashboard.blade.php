@@ -254,6 +254,29 @@
                     </div>
 
                 </div>
+
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
+                    <div class="widget widget-five">
+                        <div class="widget-content">
+                            <div class="header">
+                                <div class="header-body">
+                                    <h6>Hasil Ujian</h6>
+                                </div>
+                            </div>
+                            <div class="w-content">
+                                <div class="">
+                                    <p class="task-left">
+                                        {{ $benar_pg->count() }}
+                                    </p>
+                                    <p class="task-completed"><span>Ada {{ $salah_pg->count() }} Jawaban Salah</span></p>
+                                    <p class="task-completed"><span>Lebih banyak belajar lagi untuk Tipe Soal : {{ implode(', ', $needs_improvement) }}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
             </div>
 
         </div>

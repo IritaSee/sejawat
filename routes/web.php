@@ -171,7 +171,7 @@ Route::resource('/siswa/materi', MateriSiswaController::class)->middleware('is_s
 // ==>Tugas
 Route::resource('/siswa/tugas', TugasSiswaController::class)->middleware('is_siswa');
 Route::get('/siswa/tugas/kerjakan/{tugas_siswa:id}', [TugasSiswaController::class, 'kerjakan'])->middleware('is_siswa');
-// ==Ujian
+// ==Ujian 
 Route::resource('/siswa/ujian', UjianSiswaController::class)->middleware('is_siswa');
 Route::post('/siswa/simpan_pg', [UjianSiswaController::class, 'simpan_pg'])->middleware('is_siswa');
 Route::post('/siswa/simpan_essay', [UjianSiswaController::class, 'simpan_essay'])->middleware('is_siswa');

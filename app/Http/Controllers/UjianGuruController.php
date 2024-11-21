@@ -107,97 +107,192 @@ class UjianGuruController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $siswa = Siswa::where('kelas_id', $request->kelas)->get();
-        if ($siswa->count() == 0) {
-            return redirect('/guru/ujian/create')->with('pesan', "
-                <script>
-                    swal({
-                        title: 'Error!',
-                        text: 'belum ada siswa di kelas tersebut!',
-                        type: 'error',
-                        padding: '2em'
-                    })
-                </script>
-            ")->withInput();
-        }
+    // public function store(Request $request)
+    // {
+    //     $siswa = Siswa::where('kelas_id', $request->kelas)->get();
+    //     // if ($siswa->count() == 0) {
+    //     //     return redirect('/guru/ujian/create')->with('pesan', "
+    //     //         <script>
+    //     //             swal({
+    //     //                 title: 'Error!',
+    //     //                 text: 'belum ada siswa di kelas tersebut!',
+    //     //                 type: 'error',
+    //     //                 padding: '2em'
+    //     //             })
+    //     //         </script>
+    //     //     ")->withInput();
+    //     // }
 
-        $kode = Str::random(30);
-        $ujian = [
+    //     $kode = Str::random(30);
+    //     $ujian = [
+    //         'kode' => $kode,
+    //         'nama' => $request->nama,
+    //         'jenis' => 0,
+    //         'guru_id' => session()->get('id'),
+    //         'kelas_id' => $request->kelas,
+    //         'mapel_id' => $request->mapel,
+    //         'jam' => $request->jam,
+    //         'menit' => $request->menit,
+    //         'acak' => $request->acak,
+    //     ];
+
+    //     $detail_ujian = [];
+    //     $index = 0;
+    //     $nama_soal = $request->soal;
+    //     foreach ($nama_soal as $soal) {
+    //         array_push($detail_ujian, [
+    //             'kode' => $kode,
+    //             'soal' => $soal,
+    //             'pg_1' => 'A. ' . $request->pg_1[$index],
+    //             'pg_2' => 'B. ' . $request->pg_2[$index],
+    //             'pg_3' => 'C. ' . $request->pg_3[$index],
+    //             'pg_4' => 'D. ' . $request->pg_4[$index],
+    //             'pg_5' => 'E. ' . $request->pg_5[$index],
+    //             'jawaban' => $request->jawaban[$index],
+    //             'pembahasan' => $request->pembahasan[$index],
+    //             'pembahasan_full' => $request->pembahasan_full[$index],
+    //             'tipe_soal' => $request->tipe_soal[$index]
+    //         ]);
+
+    //         $index++;
+    //     }
+
+    //     $email_siswa = '';
+    //     $waktu_ujian = [];
+    //     foreach ($siswa as $s) {
+    //         $email_siswa .= $s->email . ',';
+
+    //         array_push($waktu_ujian, [
+    //             'kode' => $kode,
+    //             'siswa_id' => $s->id
+    //         ]);
+    //     }
+
+    //     $email_siswa = Str::replaceLast(',', '', $email_siswa);
+    //     $email_siswa = explode(',', $email_siswa);
+
+    //     $email_settings = EmailSettings::first();
+    //     if ($email_settings->notif_ujian == '1') {
+    //         $details = [
+    //             'nama_guru' => session()->get('nama_guru'),
+    //             'nama_ujian' => $request->nama,
+    //             'jam' => $request->jam,
+    //             'menit' => $request->menit,
+    //         ];
+    //         Mail::to($email_siswa)->send(new NotifUjian($details));
+    //     }
+
+
+    //     Ujian::insert($ujian);
+    //     DetailUjian::insert($detail_ujian);
+    //     WaktuUjian::insert($waktu_ujian);
+
+    //     return redirect('/guru/ujian')->with('pesan', "
+    //         <script>
+    //             swal({
+    //                 title: 'Success!',
+    //                 text: 'ujian sudah di posting!',
+    //                 type: 'success',
+    //                 padding: '2em'
+    //             })
+    //         </script>
+    //     ");
+    // }
+
+    public function store(Request $request)
+{
+    // Mengambil semua siswa di kelas yang dituju
+    $siswa = Siswa::where('kelas_id', $request->kelas)->get();
+    // Pengecekan jumlah siswa dihapus agar ujian dapat dibuat meskipun belum ada siswa di kelas
+
+    // Membuat kode ujian unik
+    $kode = Str::random(30);
+
+    // Menyiapkan data ujian
+    $ujian = [
+        'kode' => $kode,
+        'nama' => $request->nama,
+        'jenis' => 0, // 0 untuk PG (Pilihan Ganda)
+        'guru_id' => session()->get('id'),
+        'kelas_id' => $request->kelas,
+        'mapel_id' => $request->mapel,
+        'jam' => $request->jam,
+        'menit' => $request->menit,
+        'acak' => $request->acak,
+    ];
+
+    // Menyiapkan detail ujian
+    $detail_ujian = [];
+    $index = 0;
+    $nama_soal = $request->soal;
+    foreach ($nama_soal as $soal) {
+        array_push($detail_ujian, [
             'kode' => $kode,
-            'nama' => $request->nama,
-            'jenis' => 0,
-            'guru_id' => session()->get('id'),
-            'kelas_id' => $request->kelas,
-            'mapel_id' => $request->mapel,
+            'soal' => $soal,
+            'pg_1' => 'A. ' . $request->pg_1[$index],
+            'pg_2' => 'B. ' . $request->pg_2[$index],
+            'pg_3' => 'C. ' . $request->pg_3[$index],
+            'pg_4' => 'D. ' . $request->pg_4[$index],
+            'pg_5' => 'E. ' . $request->pg_5[$index],
+            'jawaban' => $request->jawaban[$index],
+            'pembahasan' => $request->pembahasan[$index],
+            'pembahasan_full' => $request->pembahasan_full[$index],
+            'tipe_soal' => $request->tipe_soal[$index]
+        ]);
+
+        $index++;
+    }
+
+    // Menyiapkan data email siswa
+    $email_siswa = '';
+    $waktu_ujian = [];
+    foreach ($siswa as $s) {
+        $email_siswa .= $s->email . ',';
+
+        array_push($waktu_ujian, [
+            'kode' => $kode,
+            'siswa_id' => $s->id
+        ]);
+    }
+
+    // Membersihkan string email
+    $email_siswa = Str::replaceLast(',', '', $email_siswa);
+    $email_siswa = explode(',', $email_siswa);
+
+    // Mengirim email notifikasi jika diaktifkan dan ada siswa
+    $email_settings = EmailSettings::first();
+    if ($email_settings->notif_ujian == '1' && !empty($email_siswa)) {
+        $details = [
+            'nama_guru' => session()->get('nama_guru'),
+            'nama_ujian' => $request->nama,
             'jam' => $request->jam,
             'menit' => $request->menit,
-            'acak' => $request->acak,
         ];
-
-        $detail_ujian = [];
-        $index = 0;
-        $nama_soal = $request->soal;
-        foreach ($nama_soal as $soal) {
-            array_push($detail_ujian, [
-                'kode' => $kode,
-                'soal' => $soal,
-                'pg_1' => 'A. ' . $request->pg_1[$index],
-                'pg_2' => 'B. ' . $request->pg_2[$index],
-                'pg_3' => 'C. ' . $request->pg_3[$index],
-                'pg_4' => 'D. ' . $request->pg_4[$index],
-                'pg_5' => 'E. ' . $request->pg_5[$index],
-                'jawaban' => $request->jawaban[$index],
-                'pembahasan' => $request->pembahasan[$index],
-                'pembahasan_full' => $request->pembahasan_full[$index],
-                'tipe_soal' => $request->tipe_soal[$index]
-            ]);
-
-            $index++;
-        }
-
-        $email_siswa = '';
-        $waktu_ujian = [];
-        foreach ($siswa as $s) {
-            $email_siswa .= $s->email . ',';
-
-            array_push($waktu_ujian, [
-                'kode' => $kode,
-                'siswa_id' => $s->id
-            ]);
-        }
-
-        $email_siswa = Str::replaceLast(',', '', $email_siswa);
-        $email_siswa = explode(',', $email_siswa);
-
-        $email_settings = EmailSettings::first();
-        if ($email_settings->notif_ujian == '1') {
-            $details = [
-                'nama_guru' => session()->get('nama_guru'),
-                'nama_ujian' => $request->nama,
-                'jam' => $request->jam,
-                'menit' => $request->menit,
-            ];
-            Mail::to($email_siswa)->send(new NotifUjian($details));
-        }
-
-
-        Ujian::insert($ujian);
-        DetailUjian::insert($detail_ujian);
-        WaktuUjian::insert($waktu_ujian);
-
-        return redirect('/guru/ujian')->with('pesan', "
-            <script>
-                swal({
-                    title: 'Success!',
-                    text: 'ujian sudah di posting!',
-                    type: 'success',
-                    padding: '2em'
-                })
-            </script>
-        ");
+        Mail::to($email_siswa)->send(new NotifUjian($details));
     }
+
+    // Menyimpan data ujian dan detail ujian
+    Ujian::insert($ujian);
+    DetailUjian::insert($detail_ujian);
+
+    // Menyimpan assignment ujian ke siswa jika ada
+    if (!empty($waktu_ujian)) {
+        WaktuUjian::insert($waktu_ujian);
+    }
+
+    // Redirect dengan pesan sukses
+    return redirect('/guru/ujian')->with('pesan', "
+        <script>
+            swal({
+                title: 'Success!',
+                text: 'Ujian sudah diposting!',
+                type: 'success',
+                padding: '2em'
+            })
+        </script>
+    ");
+}
+
     public function pg_excel(Request $request)
     {
         $siswa = Siswa::where('kelas_id', $request->e_kelas)->get();
@@ -267,112 +362,220 @@ class UjianGuruController extends Controller
             </script>
         ");
     }
+    // public function store_bank_pg(Request $request)
+    // {
+    //     $siswa = Siswa::where('kelas_id', $request->b_kelas)->get();
+    //     if ($siswa->count() == 0) {
+    //         return redirect('/guru/ujian/create')->with('pesan', "
+    //             <script>
+    //                 swal({
+    //                     title: 'Error!',
+    //                     text: 'belum ada siswa di kelas tersebut!',
+    //                     type: 'error',
+    //                     padding: '2em'
+    //                 })
+    //             </script>
+    //         ")->withInput();
+    //     }
+
+    //     $detail_bank_soal = DetailbankpgModel::where('kode', $request->kode_bank)->get();
+
+    //     if ($detail_bank_soal->count() == 0) {
+    //         return redirect('/guru/ujian/create')->with('pesan', "
+    //             <script>
+    //                 swal({
+    //                     title: 'Error!',
+    //                     text: 'Data Bank soal tidak ditemukan!',
+    //                     type: 'error',
+    //                     padding: '2em'
+    //                 })
+    //             </script>
+    //         ")->withInput();
+    //     }
+
+    //     $kode = Str::random(30);
+    //     $ujian = [
+    //         'kode' => $kode,
+    //         'nama' => $request->b_nama_ujian,
+    //         'jenis' => 0,
+    //         'guru_id' => session()->get('id'),
+    //         'kelas_id' => $request->b_kelas,
+    //         'mapel_id' => $request->b_mapel,
+    //         'jam' => $request->b_jam,
+    //         'menit' => $request->b_menit,
+    //         'acak' => $request->b_acak,
+    //     ];
+
+    //     $detail_ujian = [];
+    //     $index = 0;
+    //     foreach ($detail_bank_soal as $soal) {
+    //         array_push($detail_ujian, [
+    //             'kode' => $kode,
+    //             'soal' => $soal->soal,
+    //             'pg_1' => $soal->pg_1,
+    //             'pg_2' => $soal->pg_2,
+    //             'pg_3' => $soal->pg_3,
+    //             'pg_4' => $soal->pg_4,
+    //             'pg_5' => $soal->pg_5,
+    //             'jawaban' => $soal->jawaban,
+    //             'pembahasan' => $soal->pembahasan,
+    //             'pembahasan_full' => $soal->pembahasan_full,
+    //             'tipe_soal' => $soal->tipe_soal
+
+    //         ]);
+
+    //         $index++;
+    //     }
+
+    //     $email_siswa = '';
+    //     $waktu_ujian = [];
+    //     foreach ($siswa as $s) {
+    //         $email_siswa .= $s->email . ',';
+
+    //         array_push($waktu_ujian, [
+    //             'kode' => $kode,
+    //             'siswa_id' => $s->id
+    //         ]);
+    //     }
+
+    //     $email_siswa = Str::replaceLast(',', '', $email_siswa);
+    //     $email_siswa = explode(',', $email_siswa);
+
+    //     $email_settings = EmailSettings::first();
+    //     if ($email_settings->notif_ujian == '1') {
+    //         $details = [
+    //             'nama_guru' => session()->get('nama_guru'),
+    //             'nama_ujian' => $request->b_nama_ujian,
+    //             'jam' => $request->b_jam,
+    //             'menit' => $request->b_menit,
+    //         ];
+    //         Mail::to($email_siswa)->send(new NotifUjian($details));
+    //     }
+
+
+    //     Ujian::insert($ujian);
+    //     DetailUjian::insert($detail_ujian);
+    //     WaktuUjian::insert($waktu_ujian);
+
+    //     return redirect('/guru/ujian')->with('pesan', "
+    //         <script>
+    //             swal({
+    //                 title: 'Success!',
+    //                 text: 'ujian sudah di posting!',
+    //                 type: 'success',
+    //                 padding: '2em'
+    //             })
+    //         </script>
+    //     ");
+    // }
+
     public function store_bank_pg(Request $request)
-    {
-        $siswa = Siswa::where('kelas_id', $request->b_kelas)->get();
-        if ($siswa->count() == 0) {
-            return redirect('/guru/ujian/create')->with('pesan', "
-                <script>
-                    swal({
-                        title: 'Error!',
-                        text: 'belum ada siswa di kelas tersebut!',
-                        type: 'error',
-                        padding: '2em'
-                    })
-                </script>
-            ")->withInput();
-        }
+{
+    // Mengambil semua siswa di kelas yang dituju
+    $siswa = Siswa::where('kelas_id', $request->b_kelas)->get();
+    // Pengecekan jumlah siswa dihapus agar ujian dapat dibuat meskipun belum ada siswa di kelas
 
-        $detail_bank_soal = DetailbankpgModel::where('kode', $request->kode_bank)->get();
+    // Mengambil detail bank soal
+    $detail_bank_soal = DetailbankpgModel::where('kode', $request->kode_bank)->get();
 
-        if ($detail_bank_soal->count() == 0) {
-            return redirect('/guru/ujian/create')->with('pesan', "
-                <script>
-                    swal({
-                        title: 'Error!',
-                        text: 'Data Bank soal tidak ditemukan!',
-                        type: 'error',
-                        padding: '2em'
-                    })
-                </script>
-            ")->withInput();
-        }
-
-        $kode = Str::random(30);
-        $ujian = [
-            'kode' => $kode,
-            'nama' => $request->b_nama_ujian,
-            'jenis' => 0,
-            'guru_id' => session()->get('id'),
-            'kelas_id' => $request->b_kelas,
-            'mapel_id' => $request->b_mapel,
-            'jam' => $request->b_jam,
-            'menit' => $request->b_menit,
-            'acak' => $request->b_acak,
-        ];
-
-        $detail_ujian = [];
-        $index = 0;
-        foreach ($detail_bank_soal as $soal) {
-            array_push($detail_ujian, [
-                'kode' => $kode,
-                'soal' => $soal->soal,
-                'pg_1' => $soal->pg_1,
-                'pg_2' => $soal->pg_2,
-                'pg_3' => $soal->pg_3,
-                'pg_4' => $soal->pg_4,
-                'pg_5' => $soal->pg_5,
-                'jawaban' => $soal->jawaban,
-                'pembahasan' => $soal->pembahasan,
-                'pembahasan_full' => $soal->pembahasan_full,
-                'tipe_soal' => $soal->tipe_soal
-
-            ]);
-
-            $index++;
-        }
-
-        $email_siswa = '';
-        $waktu_ujian = [];
-        foreach ($siswa as $s) {
-            $email_siswa .= $s->email . ',';
-
-            array_push($waktu_ujian, [
-                'kode' => $kode,
-                'siswa_id' => $s->id
-            ]);
-        }
-
-        $email_siswa = Str::replaceLast(',', '', $email_siswa);
-        $email_siswa = explode(',', $email_siswa);
-
-        $email_settings = EmailSettings::first();
-        if ($email_settings->notif_ujian == '1') {
-            $details = [
-                'nama_guru' => session()->get('nama_guru'),
-                'nama_ujian' => $request->b_nama_ujian,
-                'jam' => $request->b_jam,
-                'menit' => $request->b_menit,
-            ];
-            Mail::to($email_siswa)->send(new NotifUjian($details));
-        }
-
-
-        Ujian::insert($ujian);
-        DetailUjian::insert($detail_ujian);
-        WaktuUjian::insert($waktu_ujian);
-
-        return redirect('/guru/ujian')->with('pesan', "
+    // Jika tidak ada data bank soal, redirect dengan pesan error
+    if ($detail_bank_soal->count() == 0) {
+        return redirect('/guru/ujian/create')->with('pesan', "
             <script>
                 swal({
-                    title: 'Success!',
-                    text: 'ujian sudah di posting!',
-                    type: 'success',
+                    title: 'Error!',
+                    text: 'Data Bank soal tidak ditemukan!',
+                    type: 'error',
                     padding: '2em'
                 })
             </script>
-        ");
+        ")->withInput();
     }
+
+    // Membuat kode ujian unik
+    $kode = Str::random(30);
+
+    // Menyiapkan data ujian
+    $ujian = [
+        'kode' => $kode,
+        'nama' => $request->b_nama_ujian,
+        'jenis' => 0, // 0 untuk PG (Pilihan Ganda)
+        'guru_id' => session()->get('id'),
+        'kelas_id' => $request->b_kelas,
+        'mapel_id' => $request->b_mapel,
+        'jam' => $request->b_jam,
+        'menit' => $request->b_menit,
+        'acak' => $request->b_acak,
+    ];
+
+    // Menyiapkan detail ujian
+    $detail_ujian = [];
+    foreach ($detail_bank_soal as $soal) {
+        array_push($detail_ujian, [
+            'kode' => $kode,
+            'soal' => $soal->soal,
+            'pg_1' => $soal->pg_1,
+            'pg_2' => $soal->pg_2,
+            'pg_3' => $soal->pg_3,
+            'pg_4' => $soal->pg_4,
+            'pg_5' => $soal->pg_5,
+            'jawaban' => $soal->jawaban,
+            'pembahasan' => $soal->pembahasan,
+            'pembahasan_full' => $soal->pembahasan_full,
+            'tipe_soal' => $soal->tipe_soal
+        ]);
+    }
+
+    // Menyiapkan data email siswa
+    $email_siswa = '';
+    $waktu_ujian = [];
+    foreach ($siswa as $s) {
+        $email_siswa .= $s->email . ',';
+
+        array_push($waktu_ujian, [
+            'kode' => $kode,
+            'siswa_id' => $s->id
+        ]);
+    }
+
+    // Membersihkan string email
+    $email_siswa = Str::replaceLast(',', '', $email_siswa);
+    $email_siswa = explode(',', $email_siswa);
+
+    // Mengirim email notifikasi jika diaktifkan dan ada siswa
+    $email_settings = EmailSettings::first();
+    if ($email_settings->notif_ujian == '1' && !empty($email_siswa)) {
+        $details = [
+            'nama_guru' => session()->get('nama_guru'),
+            'nama_ujian' => $request->b_nama_ujian,
+            'jam' => $request->b_jam,
+            'menit' => $request->b_menit,
+        ];
+        Mail::to($email_siswa)->send(new NotifUjian($details));
+    }
+
+    // Menyimpan data ujian dan detail ujian
+    Ujian::insert($ujian);
+    DetailUjian::insert($detail_ujian);
+
+    // Menyimpan assignment ujian ke siswa jika ada
+    if (!empty($waktu_ujian)) {
+        WaktuUjian::insert($waktu_ujian);
+    }
+
+    // Redirect dengan pesan sukses
+    return redirect('/guru/ujian')->with('pesan', "
+        <script>
+            swal({
+                title: 'Success!',
+                text: 'Ujian sudah diposting!',
+                type: 'success',
+                padding: '2em'
+            })
+        </script>
+    ");
+}
+
 
     public function store_essay(Request $request)
     {

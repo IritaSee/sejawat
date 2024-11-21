@@ -21,19 +21,83 @@ class UjianSiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function index()
+    // {
+
+    //     $notif_tugas = TugasSiswa::where('siswa_id', session()->get('id'))
+    //         ->where('date_send', null)
+    //         ->get();
+    //     $notif_ujian = WaktuUjian::where('siswa_id', session()->get('id'))
+    //         ->where('selesai', null)
+    //         ->get();
+    //     $ujian = WaktuUjian::where('siswa_id', session()->get('id'))
+    //         ->orderBy('id', 'desc')
+    //         ->get();
+
+
+    //     return view('siswa.ujian.index', [
+    //         'title' => 'Data Ujian',
+    //         'plugin' => '
+    //             <link rel="stylesheet" type="text/css" href="' . url("/assets/cbt-malela") . '/plugins/table/datatable/datatables.css">
+    //             <link rel="stylesheet" type="text/css" href="' . url("/assets/cbt-malela") . '/plugins/table/datatable/dt-global_style.css">
+    //             <script src="' . url("/assets/cbt-malela") . '/plugins/table/datatable/datatables.js"></script>
+    //             <script src="https://cdn.datatables.net/fixedcolumns/4.1.0/js/dataTables.fixedColumns.min.js"></script>
+    //         ',
+    //         'menu' => [
+    //             'menu' => 'ujian',
+    //             'expanded' => 'ujian'
+    //         ],
+    //         'siswa' => Siswa::firstWhere('id', session()->get('id')),
+    //         'notif_tugas' => $notif_tugas,
+    //         'notif_materi' => Notifikasi::where('siswa_id', session()->get('id'))->get(),
+    //         'notif_ujian' => $notif_ujian,
+    //         'ujian' => $ujian
+    //     ]);
+    // }
+
     public function index()
     {
+        $siswa_id = session()->get('id');
 
-        $notif_tugas = TugasSiswa::where('siswa_id', session()->get('id'))
+        // Mengambil data siswa berdasarkan ID dari sesi
+        $siswa = Siswa::find($siswa_id);
+
+        $kelas_id = $siswa->kelas_id;
+
+        // Mengambil semua ujian yang ada di kelas siswa
+        $ujian_kelas = Ujian::where('kelas_id', $kelas_id)->get();
+
+        // Mengassign ujian yang belum diassign ke siswa
+        foreach ($ujian_kelas as $ujian) {
+            WaktuUjian::firstOrCreate(
+                [
+                    'kode' => $ujian->kode,
+                    'siswa_id' => $siswa_id
+                ],
+                [
+                    'waktu_berakhir' => null,
+                    'selesai' => 0
+                ]
+            );
+        }
+
+        // Mengambil notifikasi tugas yang belum dikirim
+        $notif_tugas = TugasSiswa::where('siswa_id', $siswa_id)
             ->where('date_send', null)
             ->get();
-        $notif_ujian = WaktuUjian::where('siswa_id', session()->get('id'))
-            ->where('selesai', null)
-            ->get();
-        $ujian = WaktuUjian::where('siswa_id', session()->get('id'))
-            ->orderBy('id', 'desc')
+
+        // Mengambil notifikasi ujian yang belum selesai
+        $notif_ujian = WaktuUjian::where('siswa_id', $siswa_id)
+            ->where('selesai', 0)
             ->get();
 
+        // Mengambil notifikasi materi
+        $notif_materi = Notifikasi::where('siswa_id', $siswa_id)->get();
+
+        // Mengambil semua ujian yang sudah diassign ke siswa
+        $ujian = WaktuUjian::where('siswa_id', $siswa_id)
+            ->orderBy('id', 'desc')
+            ->get();
 
         return view('siswa.ujian.index', [
             'title' => 'Data Ujian',
@@ -47,9 +111,9 @@ class UjianSiswaController extends Controller
                 'menu' => 'ujian',
                 'expanded' => 'ujian'
             ],
-            'siswa' => Siswa::firstWhere('id', session()->get('id')),
+            'siswa' => $siswa,
             'notif_tugas' => $notif_tugas,
-            'notif_materi' => Notifikasi::where('siswa_id', session()->get('id'))->get(),
+            'notif_materi' => $notif_materi,
             'notif_ujian' => $notif_ujian,
             'ujian' => $ujian
         ]);
@@ -182,6 +246,8 @@ class UjianSiswaController extends Controller
             'waktu_ujian' => $waktu_ujian
         ]);
     }
+
+
     public function essay(Ujian $ujian)
     {
         $notif_tugas = TugasSiswa::where('siswa_id', session()->get('id'))

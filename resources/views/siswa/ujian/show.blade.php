@@ -73,12 +73,7 @@
                                                             {{ ucfirst(str_replace('_', ' ', $soal->detailujian->tipe_soal)) }}
                                                         </span>
                                                     </h6>
-                                                    <!-- Jika Anda masih ingin menampilkan tipe_soal secara terpisah, Anda bisa menghapus atau mempertahankannya -->
-                                                    <!--
-                                                                            <h6 class="question-title color-green" style="word-wrap: break-word">
-                                                                                {!! $soal->detailujian->tipe_soal !!}
-                                                                            </h6>
-                                                                            -->
+
                                                 </div>
                                             </div>
 

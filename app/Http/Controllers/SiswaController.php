@@ -92,7 +92,6 @@ class SiswaController extends Controller
                 $needs_improvement[] = $tipe;
             }
         }
-        
         return view('siswa.dashboard', [
             'title' => 'Dashboard Siswa',
             'plugin' => '
@@ -118,6 +117,7 @@ class SiswaController extends Controller
             'nilai' => round($nilai),
             'hasil_essay' => $hasil_essay,
             'needs_improvement' => $needs_improvement,
+            'filtered_tipe_soal' => $filtered_tipe_soal 
         ]);
     }
 

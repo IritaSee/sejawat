@@ -1,6 +1,7 @@
 @extends('template.main')
 @section('content')
     @include('template.navbar.siswa')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
     <!--  BEGIN CONTENT AREA  -->
@@ -192,7 +193,7 @@
             </div>
 
             <div class="row layout-top-spacing">
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
+                <!-- <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
                     <div class="widget widget-five">
                         <div class="widget-content">
                             <div class="header">
@@ -254,7 +255,7 @@
                     </div>
 
                 </div>
-
+ -->
                 <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
                     <div class="widget widget-five">
                         <div class="widget-content">
@@ -282,6 +283,84 @@
                     </div>
                 </div>
 
+                @php
+                    $tipeDeskripsi = [
+                        1 => 'Mengingat',
+                        2 => 'Memahami',
+                        3 => 'Menerapkan',
+                        4 => 'Menganalisis',
+                        5 => 'Mengevaluasi',
+                        6 => 'Menciptakan',
+                    ];
+
+                    // Mapping data untuk chart berdasarkan tipe soal
+                    $chartData = [];
+                    foreach ($filtered_tipe_soal as $tipe => $results) {
+                        $correct_count = count(array_filter($results, fn($value) => $value === 1));
+                        $wrong_count = count(array_filter($results, fn($value) => $value === 0));
+                        $chartData[] = [
+                            'tipe' => $tipeDeskripsi[$tipe] ?? 'Tidak Diketahui',
+                            'benar' => $correct_count,
+                            'salah' => $wrong_count,
+                        ];
+                    }
+                @endphp
+
+
+                <div class="row">
+                    @foreach ($chartData as $index => $data)
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
+                            <div class="widget widget-five">
+                                <div class="widget-content">
+                                    <div class="header">
+                                        <div class="header-body">
+                                            <h6>Evaluasi Perfoma {{ $data['tipe'] }}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="w-content">
+                                        <!-- Chart Container -->
+                                        <div class="chart-container">
+                                            <canvas id="chart{{ $index + 1 }}"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const chartData = @json($chartData);
+                        chartData.forEach((data, index) => {
+                            const totalSoal = data.benar + data.salah;
+                            const ctx = document.getElementById(`chart${index + 1}`).getContext('2d');
+                            new Chart(ctx, {
+                                type: 'doughnut',
+                                data: {
+                                    labels: ['Benar', 'Salah'],
+                                    datasets: [{
+                                        data: [data.benar, data.salah],
+                                        backgroundColor: ['rgba(75, 192, 192, 0.5)', 'rgba(255, 99, 132, 0.5)'],
+                                        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
+                                        borderWidth: 1,
+                                    }],
+                                },
+                                options: {
+                                    responsive: true,
+                                    plugins: {
+                                        legend: {
+                                            position: 'bottom', 
+                                        },
+                                        title: {
+                                            display: true,
+                                            text: `Jumlah Soal: ${totalSoal}`, 
+                                        },
+                                    },
+                                },
+                            });
+                        });
+                    });
+                </script>
                 </div>
             </div>
 

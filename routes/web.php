@@ -47,6 +47,15 @@ Route::get('/aktivasi/{token:token}', [AuthController::class, 'aktivasi']);
 Route::post('/change_password/{token:token}', [AuthController::class, 'change_password_']);
 
 
+// Route untuk Registrasi Siswa
+// Route Registrasi Terpisah untuk Siswa
+Route::get('/register/student', [AuthController::class, 'showStudentRegistrationForm'])->name('register.student');
+Route::post('/register/student', [AuthController::class, 'registerStudent'])->name('register.student.submit');
+// Route untuk Registrasi Guru
+Route::get('/register/teacher', [AuthController::class, 'showTeacherRegistrationForm'])->name('register.teacher');;
+Route::post('/register/teacher', [AuthController::class, 'registerTeacher'])->name('register.teacher.submit');;
+
+
 // START::ROUTE ADMIN
 Route::get('/admin', [AdminController::class, 'index'])->middleware('is_admin');
 Route::get('/admin/profile', [AdminController::class, 'profile'])->middleware('is_admin');

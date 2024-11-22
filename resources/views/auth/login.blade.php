@@ -168,7 +168,8 @@
                             <p class="signup-link">Admin belum ada. <a href="{{ url('/install') }}">Buat akun Admin
                                     dulu</a></p>
                         @else
-                            <p class="signup-link">Daftar Akun. <a href="{{ url('/register') }}">Klik Disini!</a></p>
+                            <p class="signup-link">Daftar Akun. <a href="{{ url('/register/student') }}">Klik
+                                    Disini!</a></p>
                         @endif
                         <form action="{{ url('/login') }}" method="POST" class="text-left">
                             <div class="form">

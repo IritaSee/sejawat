@@ -208,114 +208,176 @@ class AuthController extends Controller
         ");
     }
 
-    public function register()
+    // public function register()
+    // {
+    //     $admin = Admin::all();
+    //     if ($admin->count() == 0) {
+    //         return redirect()->action([AuthController::class, 'index']);
+    //     }
+
+    //     return view('auth.register', [
+    //         "title" => "Daftar Akun CBT",
+    //         "kelas" => Kelas::all()
+    //     ]);
+    // }
+    // public function register_(Request $request)
+    // {
+    //     if ($request->input('saya_siswa')) {
+    //         $validate = $request->validate([
+    //             'email' => 'unique:admins'
+    //         ]);
+    //         $validate = $request->validate([
+    //             'email' => 'unique:guru'
+    //         ]);
+
+    //         $validate = $request->validate([
+    //             'nis' => 'required|unique:siswa',
+    //             'nama' => 'required',
+    //             'gender' => 'required',
+    //             'kelas_id' => 'required',
+    //             'email' => 'required|email:dns|unique:siswa',
+    //             'password' => 'required',
+    //         ]);
+
+    //         $validate['nama_siswa'] = $validate['nama'];
+    //         $validate['password'] = Hash::make($validate['password']);
+
+    //         $tokens = [
+    //             'token' => Str::random(40),
+    //             'email' => $validate['email'],
+    //             'key' => 'aktivasi',
+    //             'role' => 3,
+    //         ];
+    //         $details = [
+    //             'nama' => $request->nama,
+    //             'email' => $request->email,
+    //             'password' => $request->password,
+    //             'token' => $tokens['token']
+    //         ];
+    //         Mail::to("$request->email")->send(new VerifikasiAkun($details));
+    //         Siswa::create($validate);
+    //         Token::create($tokens);
+
+    //         return redirect('/')->with('pesan', "
+    //             <script>
+    //                 swal({
+    //                     title: 'Berhasil!',
+    //                     text: 'silahkan buka email untuk aktivasi akunmu',
+    //                     type: 'success',
+    //                     padding: '2em'
+    //                 })
+    //             </script>
+    //         ");
+    //     }
+
+    //     if ($request->input('saya_siswa') == null) {
+    //         $validate = $request->validate([
+    //             'email' => 'unique:admins'
+    //         ]);
+    //         $validate = $request->validate([
+    //             'email' => 'unique:siswa'
+    //         ]);
+    //         $validate = $request->validate([
+    //             'nama' => 'required',
+    //             'gender' => 'required',
+    //             'email' => 'required|email:dns|unique:guru',
+    //             'password' => 'required',
+    //         ]);
+
+    //         $validate['nama_guru'] = $validate['nama'];
+    //         $validate['password'] = Hash::make($validate['password']);
+
+
+    //         $tokens = [
+    //             'token' => Str::random(40),
+    //             'email' => $validate['email'],
+    //             'key' => 'aktivasi',
+    //             'role' => 2,
+    //         ];
+
+    //         $details = [
+    //             'nama' => $request->nama,
+    //             'email' => $request->email,
+    //             'password' => $request->password,
+    //             'token' => $tokens['token']
+    //         ];
+    //         Mail::to("$request->email")->send(new VerifikasiAkun($details));
+    //         Guru::create($validate);
+    //         Token::create($tokens);
+    //         return redirect('/')->with('pesan', "
+    //             <script>
+    //                 swal({
+    //                     title: 'Berhasil!',
+    //                     text: 'silahkan buka email untuk aktivasi akunmu',
+    //                     type: 'success',
+    //                     padding: '2em'
+    //                 })
+    //             </script>
+    //         ");
+    //     }
+    // }
+
+    public function showStudentRegistrationForm()
     {
         $admin = Admin::all();
         if ($admin->count() == 0) {
             return redirect()->action([AuthController::class, 'index']);
         }
 
-        return view('auth.register', [
-            "title" => "Daftar Akun CBT",
+        return view('auth.register_student', [
+            "title" => "Daftar Akun Siswa CBT",
             "kelas" => Kelas::all()
         ]);
     }
-    public function register_(Request $request)
+
+    public function registerStudent(Request $request)
     {
-        if ($request->input('saya_siswa')) {
-            $validate = $request->validate([
-                'email' => 'unique:admins'
-            ]);
-            $validate = $request->validate([
-                'email' => 'unique:guru'
-            ]);
+        $validate = $request->validate([
+            'nis' => 'required|unique:siswa',
+            'nama' => 'required',
+            'gender' => 'required',
+            'kelas_id' => 'required',
+            'email' => 'required|email:dns|unique:siswa',
+            'password' => 'required',
+        ]);
 
-            $validate = $request->validate([
-                'nis' => 'required|unique:siswa',
-                'nama' => 'required',
-                'gender' => 'required',
-                'kelas_id' => 'required',
-                'email' => 'required|email:dns|unique:siswa',
-                'password' => 'required',
-            ]);
+        $validate['nama_siswa'] = $validate['nama'];
+        $validate['password'] = Hash::make($validate['password']);
 
-            $validate['nama_siswa'] = $validate['nama'];
-            $validate['password'] = Hash::make($validate['password']);
+        $tokens = [
+            'token' => Str::random(40),
+            'email' => $validate['email'],
+            'key' => 'aktivasi',
+            'role' => 3,
+        ];
 
-            $tokens = [
-                'token' => Str::random(40),
-                'email' => $validate['email'],
-                'key' => 'aktivasi',
-                'role' => 3,
-            ];
-            $details = [
-                'nama' => $request->nama,
-                'email' => $request->email,
-                'password' => $request->password,
-                'token' => $tokens['token']
-            ];
-            Mail::to("$request->email")->send(new VerifikasiAkun($details));
-            Siswa::create($validate);
-            Token::create($tokens);
+        $details = [
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'password' => $request->password,
+            'token' => $tokens['token']
+        ];
 
-            return redirect('/')->with('pesan', "
-                <script>
-                    swal({
-                        title: 'Berhasil!',
-                        text: 'silahkan buka email untuk aktivasi akunmu',
-                        type: 'success',
-                        padding: '2em'
-                    })
-                </script>
-            ");
-        }
+        Mail::to($request->email)->send(new VerifikasiAkun($details));
+        Siswa::create($validate);
+        Token::create($tokens);
 
-        if ($request->input('saya_siswa') == null) {
-            $validate = $request->validate([
-                'email' => 'unique:admins'
-            ]);
-            $validate = $request->validate([
-                'email' => 'unique:siswa'
-            ]);
-            $validate = $request->validate([
-                'nama' => 'required',
-                'gender' => 'required',
-                'email' => 'required|email:dns|unique:guru',
-                'password' => 'required',
-            ]);
-
-            $validate['nama_guru'] = $validate['nama'];
-            $validate['password'] = Hash::make($validate['password']);
-
-
-            $tokens = [
-                'token' => Str::random(40),
-                'email' => $validate['email'],
-                'key' => 'aktivasi',
-                'role' => 2,
-            ];
-
-            $details = [
-                'nama' => $request->nama,
-                'email' => $request->email,
-                'password' => $request->password,
-                'token' => $tokens['token']
-            ];
-            Mail::to("$request->email")->send(new VerifikasiAkun($details));
-            Guru::create($validate);
-            Token::create($tokens);
-            return redirect('/')->with('pesan', "
-                <script>
-                    swal({
-                        title: 'Berhasil!',
-                        text: 'silahkan buka email untuk aktivasi akunmu',
-                        type: 'success',
-                        padding: '2em'
-                    })
-                </script>
-            ");
-        }
+        return redirect('/')->with('pesan', "
+            <script>
+                swal({
+                    title: 'Berhasil!',
+                    text: 'Silahkan buka email untuk aktivasi akunmu',
+                    icon: 'success',
+                    padding: '2em'
+                })
+            </script>
+        ");
     }
+
+
+
+
+
     public function aktivasi(Token $token)
     {
         if ($token->created_at->diffInMinutes() > 60) {

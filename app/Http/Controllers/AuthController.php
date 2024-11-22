@@ -375,6 +375,67 @@ class AuthController extends Controller
     }
 
 
+        /**
+     * Menampilkan Form Registrasi Guru
+     */
+    public function showTeacherRegistrationForm()
+    {
+        $admin = Admin::all();
+        if ($admin->count() == 0) {
+            return redirect()->action([AuthController::class, 'index']);
+        }
+
+        return view('auth.register_teacher', [
+            "title" => "Daftar Akun Guru CBT",
+        ]);
+    }
+
+    /**
+     * Menangani Registrasi Guru
+     */
+    public function registerTeacher(Request $request)
+    {
+        $validate = $request->validate([
+            'email' => 'required|email:dns|unique:guru,email',
+            'nama' => 'required',
+            'gender' => 'required',
+            'password' => 'required',
+        ]);
+
+        $validate['nama_guru'] = $validate['nama'];
+        $validate['password'] = Hash::make($validate['password']);
+
+        $tokens = [
+            'token' => Str::random(40),
+            'email' => $validate['email'],
+            'key' => 'aktivasi',
+            'role' => 2,
+        ];
+
+        $details = [
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'password' => $request->password,
+            'token' => $tokens['token']
+        ];
+
+        Mail::to($request->email)->send(new VerifikasiAkun($details));
+        Guru::create($validate);
+        Token::create($tokens);
+
+        return redirect('/')->with('pesan', "
+            <script>
+                swal({
+                    title: 'Berhasil!',
+                    text: 'Silahkan buka email untuk aktivasi akunmu',
+                    icon: 'success',
+                    padding: '2em'
+                })
+            </script>
+        ");
+    }
+
+
 
 
 

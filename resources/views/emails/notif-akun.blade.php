@@ -5,18 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Akun CBT</title>
+    <title>Akun Sejawat</title>
 </head>
 
 <body>
     <div style="padding: 10px;">
         <div
             style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; font-size: 20px; color: #1C3FAA; font-weight: bold;">
-            CBT
+            Sejawat
         </div>
-        <small style="color: #000;">cbt | by Developer</small>
+        <small style="color: #000;">cbt | oleh CABCODE.id</small>
         <p style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; color: #000;">
-            Halo {{ $details['nama'] }}, Admin telah menambahkan kamu kedalam aplikasi CBT , berikut merupakan
+            Halo {{ $details['nama'] }}, Admin telah menambahkan kamu kedalam aplikasi, berikut merupakan
             informasi akunmu :
         </p>
         <table style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; color: #000;">

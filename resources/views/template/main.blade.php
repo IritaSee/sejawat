@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>CBT | {{ $title }}</title>
+    <title>LMS | {{ $title }}</title>
     <link rel="icon" type="image/x-icon" href="{{ url('/assets/img') }}/logo.png" />
     <link href="{{ url('/assets/cbt-malela') }}/assets/css/loader.css" rel="stylesheet" type="text/css" />
     <script src="{{ url('/assets/cbt-malela') }}/assets/js/loader.js"></script>
@@ -74,7 +74,7 @@
                     </a>
                 </li>
                 <li class="nav-item theme-text">
-                    <a href="" class="nav-link"> CBT </a>
+                    <a href="" class="nav-link"> LMS </a>
                 </li>
                 <li class="nav-item toggle-sidebar">
                     <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom">
@@ -199,7 +199,7 @@
                                         class="img-fluid mr-2 bg-white" alt="avatar">
                                     <div class="media-body">
                                         <h5>{{ $guru->nama_guru }}</h5>
-                                        <p>GURU CBT</p>
+                                        <p>GURU</p>
                                     </div>
                                     @php
                                         $link_profile = '/guru/profile';
@@ -210,7 +210,7 @@
                                         class="img-fluid mr-2 bg-white" alt="avatar">
                                     <div class="media-body">
                                         <h5>{{ $siswa->nama_siswa }}</h5>
-                                        <p>SISWA CBT</p>
+                                        <p>SISWA</p>
                                     </div>
                                     @php
                                         $link_profile = '/siswa/profile';

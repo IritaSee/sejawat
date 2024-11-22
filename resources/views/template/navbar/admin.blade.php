@@ -7,7 +7,7 @@
             <div class="user-info">
                 <img src="{{ asset('assets/user-profile/' . $admin->avatar) }}" alt="avatar" class="bg-white">
                 <h6 class="">{{ $admin->nama_admin }}</h6>
-                <p class="">Admin CBT</p>
+                <p class="">Admin</p>
             </div>
         </div>
         <div class="shadow-bottom"></div>

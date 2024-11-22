@@ -7,7 +7,7 @@
             <div class="user-info">
                 <img src="{{ asset('assets/user-profile/' . $guru->avatar) }}" alt="avatar" class="bg-white">
                 <h6 class="">{{ $guru->nama_guru }}</h6>
-                <p class="">GURU CBT</p>
+                <p class="">GURU</p>
             </div>
         </div>
         <div class="shadow-bottom"></div>

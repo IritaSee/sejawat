@@ -745,7 +745,7 @@
                                 </div>
                             </div>
                         </form>
-                        <p class="terms-conditions" style="margin-top: 30px;">© 2024 CBT by Developer All Rights
+                        <p class="terms-conditions" style="margin-top: 30px;">© 2024 SejawatTryout by cabcode.id All Rights
                             Reserved.</p>
                     </div>
                 </div>

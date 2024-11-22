@@ -148,7 +148,7 @@
             <div class="form-form-wrap">
                 <div class="form-container">
                     <div class="form-content">
-                        <h1 class="">Daftar Akun<br /><span class="brand-name">CBT</span></h1>
+                        <h1 class="">Daftar Akun<br /><span class="brand-name">Sejawat</span></h1>
                         <p class="signup-link">Sudah punya akun? <a href="{{ url('/') }}">Log in</a></p>
                         <form action="{{ url('/register') }}" method="POST" class="text-left" id="myform">
                             @csrf
@@ -268,7 +268,7 @@
 
                             </div>
                         </form>
-                        <p class="terms-conditions" style="margin-top: 30px;">© 2024 CBT by Developer All Rights
+                        <p class="terms-conditions" style="margin-top: 30px;">© 2024 Sejawat oleh CABCODE.id All Rights
                             Reserved.</p>
                     </div>
                 </div>

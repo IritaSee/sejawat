@@ -12,9 +12,9 @@
     <div style="padding: 10px;">
         <div
             style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; font-size: 20px; color: #1C3FAA; font-weight: bold;">
-            CBT 
+            Sejawat 
         </div>
-        <small style="color: #000;">cbt | by Developer</small>
+        <small style="color: #000;">cbt | oleh CABCODE.id</small>
         <p style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; color: #000;">
             Silahkan klik tombol dibawah ini untuk melanjutkan. copy url di bawah ini jika tombol tidak bisa di klik
         </p>

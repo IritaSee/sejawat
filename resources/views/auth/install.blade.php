@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>CBT | Installasi Form</title>
+    <title>SejawatSukses | Installasi Form</title>
     <link rel="icon" type="image/x-icon" href="{{ url('/assets/img') }}/logo.png" />
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&amp;display=swap" rel="stylesheet">
@@ -150,7 +150,7 @@
             <div class="form-form-wrap">
                 <div class="form-container">
                     <div class="form-content">
-                        <h1 class="">Buat Akun Admin <br /> Untuk Lanjut Ke CBT</h1>
+                        <h1 class="">Buat Akun Admin <br /> Untuk Lanjut Ke Sejawat</h1>
                         <form action="{{ url('/install') }}" method="POST" class="text-left">
                             @csrf
                             <div class="form">
@@ -220,7 +220,7 @@
 
                             </div>
                         </form>
-                        <p class="terms-conditions" style="margin-top: 30px;">© 2024 CBT by Developer All Rights
+                        <p class="terms-conditions" style="margin-top: 30px;">© 2024 SejawatTryout oleh CABCODE.id All Rights
                             Reserved.</p>
                     </div>
                 </div>

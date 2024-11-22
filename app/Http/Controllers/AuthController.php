@@ -325,7 +325,7 @@ class AuthController extends Controller
         }
 
         return view('auth.register_student', [
-            "title" => "Daftar Akun Siswa CBT",
+            "title" => "Daftar Akun Siswa Sejawat",
             "kelas" => Kelas::all()
         ]);
     }
@@ -386,7 +386,7 @@ class AuthController extends Controller
         }
 
         return view('auth.register_teacher', [
-            "title" => "Daftar Akun Guru CBT",
+            "title" => "Daftar Akun Guru Sejawat",
         ]);
     }
 

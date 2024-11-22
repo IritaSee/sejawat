@@ -12,11 +12,11 @@
     <div style="padding: 10px;">
         <div
             style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; font-size: 20px; color: #1C3FAA; font-weight: bold;">
-            CBT
+            SejawatSukses Learning Management System
         </div>
-        <small style="color: #000;">cbt | by Developer</small>
+        <small style="color: #000;">Sejawat LMS | oleh CABCODE.id</small>
         <p style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; color: #000;">
-            Halo {{ $details['nama'] }}, kamu telah mendaftar kedalam aplikasi CBT . berikut merupakan informasi
+            Halo {{ $details['nama'] }}, kamu telah mendaftar kedalam aplikasi Sejawat LMS . berikut merupakan informasi
             akunmu :
         </p>
         <table style="font-family: `Segoe UI`, Tahoma, Geneva, Verdana, sans-serif; color: #000;">

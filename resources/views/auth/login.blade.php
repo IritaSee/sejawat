@@ -163,7 +163,7 @@
             <div class="form-form-wrap">
                 <div class="form-container">
                     <div class="form-content">
-                        <h1 class="">Log In to <a href=""><span class="brand-name">CBT</span></a></h1>
+                        <h1 class="">Masuk ke <a href=""><span class="brand-name">SejawatTryout</span></a></h1>
                         @if (count($admin) == 0)
                             <p class="signup-link">Admin belum ada. <a href="{{ url('/install') }}">Buat akun Admin
                                     dulu</a></p>
@@ -215,7 +215,7 @@
                         <p class="signup-link">
                             Lupa Password? <a href="{{ url('/recovery') }}">Klik Disini</a>
                         </p>
-                        <p class="terms-conditions" style="margin-top: 30px;">© 2024 CBT by Developer All Rights
+                        <p class="terms-conditions" style="margin-top: 30px;">© 2024 Sejawat oleh CABCODE.id All Rights
                             Reserved.</p>
 
                     </div>

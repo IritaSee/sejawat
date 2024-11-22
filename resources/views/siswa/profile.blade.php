@@ -22,7 +22,7 @@
                             </div>
                             <div class="user-info-list" style="margin-top: -10px;">
                                 <div class="text-center">
-                                    <p>SISWA CBT</p>
+                                    <p>SISWA</p>
                                     <ul class="contacts-block list-unstyled" style="margin-top: -5px;">
                                         <li class="contacts-block__item">
                                             <span data-feather="calendar"></span>

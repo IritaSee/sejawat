@@ -249,11 +249,6 @@
                                         @enderror
                                     </div>
                                     <div id="no_induk-field" class="field-wrapper input">
-                                        <!-- <select name="kelas_id" id="" class="form-control">
-                                            @foreach ($kelas as $k)
-                                                <option value="{{ $k->id }}">{{ $k->nama_kelas }}</option>
-                                            @endforeach
-                                        </select> -->
                                         <input type="hidden" name="kelas_id" value="999">
                                     </div>
                                 </div>

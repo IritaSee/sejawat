@@ -26,8 +26,8 @@ class BankpgImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithValid
             'pg_4' => ['required'],
             'pg_5' => ['required'],
             'jawaban' => ['required'],
-            'pemabahasan' => ['required'],
-            'pemabahasan_full' => ['required'],
+            'pembahasan' => ['required'],
+            'pembahasan_full' => ['required'],
             'tipe_soal' => ['required']
         ];
     }

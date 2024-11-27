@@ -27,7 +27,7 @@ class PgImport implements ToModel, WithHeadingRow, SkipsEmptyRows, WithValidatio
             'pg_5' => ['required'],
             'jawaban' => ['required'],
             'pembahasan' => ['required'],
-            'pemabahasan_full' => ['required'],
+            'pembahasan_full' => ['required'],
             'tipe_soal' => ['required']
         ];
     }

@@ -20,3 +20,4 @@ yarn-error.log
 .env
 bootstrap/.DS_Store
 .DS_Store
+/public/assets/files

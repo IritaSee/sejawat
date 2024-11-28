@@ -16,8 +16,8 @@
                                 </a>
                             </div>
                             <div class="text-center user-info">
-                                <img src="{{ asset('assets/user-profile/' . $siswa->avatar) }}" class="img-user"
-                                    alt="avatar" style="width: 125px; height: 125px;">
+                                <img src="{{  asset('storage/' . $siswa->avatar) }}" class="img-user"
+                                alt="avatar" style="width: 125px; height: 125px;">
                                 <p class="">{{ $siswa->nama_siswa }}</p>
                             </div>
                             <div class="user-info-list" style="margin-top: -10px;">

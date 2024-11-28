@@ -156,12 +156,11 @@ class SiswaController extends Controller
         $validatedData = $request->validate($rules);
 
         if ($request->file('avatar')) {
-            if ($request->gambar_lama) {
-                if ($request->gambar_lama != 'default.png') {
-                    Storage::delete('assetsuser-profile/' . $request->gambar_lama);
-                }
+            if ($request->gambar_lama && $request->gambar_lama != 'default.png') {
+                Storage::disk('public')->delete('user-profile/' . $request->gambar_lama);
             }
-            $validatedData['avatar'] = str_replace('assets/user-profile/', '', $request->file('avatar')->store('assets/user-profile'));
+
+            $validatedData['avatar'] = $request->file('avatar')->store('user-profile', 'public');
         }
         Siswa::where('id', $siswa->id)
             ->update($validatedData);
@@ -177,6 +176,7 @@ class SiswaController extends Controller
             </script>
         ");
     }
+
     public function edit_password(Request $request, Siswa $siswa)
     {
         if (Hash::check($request->current_password, $siswa->password)) {

@@ -339,6 +339,9 @@ class AuthController extends Controller
             'kelas_id' => 'required',
             'email' => 'required|email:dns|unique:siswa',
             'password' => 'required',
+            // 'universitas' => 'required|string|max:255',
+            // 'jurusan' => 'required|string|max:255',
+            // 'ipk_s1' => 'required|numeric|between:0,4.00',
         ]);
 
         $validate['nama_siswa'] = $validate['nama'];

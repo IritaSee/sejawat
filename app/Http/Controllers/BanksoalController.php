@@ -308,6 +308,8 @@ class BanksoalController extends Controller
      */
     public function update(Request $request, BanksoalModel $bank_soal)
     {
+
+        
         $detail_bank_soal = [];
         $index = 0;
         $nama_soal = $request->soal;
@@ -353,6 +355,8 @@ class BanksoalController extends Controller
             </script>
         ");
     }
+
+
     public function update_essay(Request $request, BanksoalModel $bank_soal)
     {
         $detail_bank_soal = [];

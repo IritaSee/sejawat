@@ -242,6 +242,68 @@
                                     @enderror
                                 </div>
 
+
+                                {{-- <!-- Universitas -->
+                                <div id="universitas-field" class="field-wrapper input">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-university">
+                                        <path d="M3 21v-2l9-7 9 7v2"></path>
+                                        <path d="M9 7V3"></path>
+                                        <path d="M15 7V3"></path>
+                                        <path d="M3 13v-2l9-7 9 7v2"></path>
+                                    </svg>
+                                    <input type="text" id="universitas" name="universitas" class="form-control"
+                                        value="{{ old('universitas') }}"
+                                        placeholder="Universitas (Contoh: Universitas Indonesia)" required>
+                                    @error('universitas')
+                                        <div class="invalid-feedback" style="display: block;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+
+                                <!-- Jurusan -->
+                                <div id="jurusan-field" class="field-wrapper input">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-briefcase">
+                                        <rect x="2" y="7" width="20" height="14" rx="2"
+                                            ry="2"></rect>
+                                        <path d="M16 3h-8a2 2 0 0 0-2 2v4"></path>
+                                    </svg>
+                                    <input type="text" id="jurusan" name="jurusan" class="form-control"
+                                        value="{{ old('jurusan', 'Farmasi') }}"
+                                        placeholder="Jurusan (Contoh: Farmasi)" required>
+                                    @error('jurusan')
+                                        <div class="invalid-feedback" style="display: block;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+
+                                <!-- IPK S1 -->
+                                <div id="ipk_s1-field" class="field-wrapper input">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="feather feather-bar-chart-2">
+                                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                                    </svg>
+                                    <input type="number" id="ipk_s1" name="ipk_s1" class="form-control"
+                                        value="{{ old('ipk_s1') }}" placeholder="IPK S1 (Contoh: 3.75)"
+                                        step="0.01" min="0" max="4.00" required>
+                                    @error('ipk_s1')
+                                        <div class="invalid-feedback" style="display: block;">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div> --}}
+
                                 <!-- Kelas -->
                                 <div id="kelas-field" class="field-wrapper input">
                                     {{-- <select name="kelas_id" class="form-control" required>
@@ -278,7 +340,8 @@
                                 </div>
                             </div>
                         </form>
-                        <p class="terms-conditions" style="margin-top: 30px;">© 2024 Sejawat oleh CABCODE.id All Rights
+                        <p class="terms-conditions" style="margin-top: 30px;">© 2024 Sejawat oleh CABCODE.id All
+                            Rights
                             Reserved.</p>
                     </div>
                 </div>

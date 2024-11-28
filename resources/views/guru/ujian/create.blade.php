@@ -192,7 +192,7 @@
                                         <div class="col-lg-8">
                                             <div class="form-group">
                                                 <label for="">Pembahasan</label>
-                                                <div class="input-group">
+                                                <!-- <div class="input-group">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="basic-addon5">
                                                             <svg viewBox="0 0 24 24" width="24" height="24"
@@ -206,14 +206,15 @@
                                                     <textarea name="pembahasan[]" class="form-control form-control-lg" placeholder="Masukkan pembahasan di sini..."
                                                         aria-label="Pembahasan" aria-describedby="basic-addon5" rows="3" required autocomplete="off"></textarea>
 
-                                                </div>
+                                                </div> -->
+                                                <textarea name="pembahasan[]" cols="30" rows="2" class="summernote form-control form-control-lg" wrap="hard" placeholder="Masukkan pembahasan di sini..." required></textarea>
                                             </div>
                                         </div>
 
 
                                         <div class="col-lg-4">
                                             <div class="form-group">
-                                                <label for="">Pembahasan Lengkap</label>
+                                                <label for="">Link Materi</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="basic-addon6">

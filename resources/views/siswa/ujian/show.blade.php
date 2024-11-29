@@ -68,10 +68,10 @@
                                                         Soal No. <span class="badge badge-primary no-soal"
                                                             style="font-size: 1rem">{{ $no }}</span>
                                                         <!-- Penambahan Tipe Soal -->
-                                                        <span class="badge badge-info ml-2" style="font-size: 0.9rem;">
+                                                        <!-- <span class="badge badge-info ml-2" style="font-size: 0.9rem;">
                                                             Tipe Soal:
                                                             {{ ucfirst(str_replace('_', ' ', $soal->detailujian->tipe_soal)) }}
-                                                        </span>
+                                                        </span> -->
                                                     </h6>
 
                                                 </div>
@@ -333,10 +333,10 @@
                                                         Soal No. <span class="badge badge-primary no-soal"
                                                             style="font-size: 1rem">{{ $no }}</span>
                                                         <!-- Penambahan Tipe Soal -->
-                                                        <span class="badge badge-info ml-2" style="font-size: 0.9rem;">
+                                                        <!-- <span class="badge badge-info ml-2" style="font-size: 0.9rem;">
                                                             Tipe Soal:
                                                             {{ ucfirst(str_replace('_', ' ', $soal->detailujian->tipe_soal)) }}
-                                                        </span>
+                                                        </span> -->
                                                     </h6>
                                                 </div>
                                             </div>

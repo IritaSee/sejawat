@@ -1,6 +1,14 @@
 @extends('template.main')
 @section('content')
     @include('template.navbar.siswa')
+    <?php
+        if(!is_null($waktu_ujian->waktu_berakhir)){
+            $datetime_local = $waktu_ujian->waktu_berakhir;
+            $timezone = \Carbon\Carbon::now()->format('P');
+            $datetime_local = implode('T',explode(' ',$datetime_local)) . $timezone;
+        }
+    ?>
+
     <style>
         .btn-white {
             background: #cacaca;
@@ -43,7 +51,7 @@
                 </div>
             </div>
 
-            @if ($waktu_ujian->selesai === null)
+            @if (is_null($waktu_ujian->selesai))
                 <div class="row">
                     <div class="col-lg-9">
                         <form id="examwizard-question" action="{{ url('/siswa/ujian') }}" method="POST">

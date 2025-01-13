@@ -221,8 +221,8 @@ class UjianSiswaController extends Controller
             }
 
 
-            $timestamp = strtotime(date('Y-m-d H:i', time()));
-            $waktu_berakhir =  date('Y-m-d H:i', strtotime("+$ujian->jam hour +$ujian->menit minute", $timestamp));
+            $timestamp = strtotime(date('Y-m-d H:i:s', time()));
+            $waktu_berakhir =  date('Y-m-d H:i:s', strtotime("+$ujian->jam hour +$ujian->menit minute", $timestamp));
 
             $data_waktu_ujian = [
                 'waktu_berakhir' => $waktu_berakhir
@@ -286,8 +286,8 @@ class UjianSiswaController extends Controller
                 ]);
             }
 
-            $timestamp = strtotime(date('Y-m-d H:i', time()));
-            $waktu_berakhir =  date('Y-m-d H:i', strtotime("+$ujian->jam hour +$ujian->menit minute", $timestamp));
+            $timestamp = strtotime(date('Y-m-d H:i:s', time()));
+            $waktu_berakhir =  date('Y-m-d H:i:s', strtotime("+$ujian->jam hour +$ujian->menit minute", $timestamp));
 
             $data_waktu_ujian = [
                 'waktu_berakhir' => $waktu_berakhir
